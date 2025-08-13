@@ -86,7 +86,8 @@ class PremiereAutomation:
                       output_dir: str, job_id: str = None) -> List[str]:
         """Process videos using Premiere Pro automation"""
         if not self.enabled:
-            return self._mock_process_videos(input_files, tape_type, output_dir, job_id)
+            self.logger.warning("Premiere Pro processing is disabled - no videos will be processed")
+            return []
         
         processed_files = []
         os.makedirs(output_dir, exist_ok=True)
@@ -396,42 +397,7 @@ class PremiereAutomation:
             self.logger.error(f"FFmpeg fallback error: {e}")
             return None
     
-    def _mock_process_videos(self, input_files: List[str], tape_type: str, 
-                           output_dir: str, job_id: str = None) -> List[str]:
-        """Mock video processing for testing without Premiere Pro"""
-        self.logger.info(f"MOCK: Processing {len(input_files)} videos with {tape_type} preset")
-        
-        os.makedirs(output_dir, exist_ok=True)
-        processed_files = []
-        
-        for i, input_file in enumerate(input_files):
-            if not os.path.exists(input_file):
-                self.logger.warning(f"MOCK: Input file not found: {input_file}")
-                continue
-            
-            # Create mock output file
-            input_name = Path(input_file).stem
-            if job_id:
-                output_name = f"{job_id}_{input_name}_processed_{tape_type.lower()}.mp4"
-            else:
-                output_name = f"{input_name}_processed_{tape_type.lower()}.mp4"
-            
-            output_file = os.path.join(output_dir, output_name)
-            
-            # Copy input to output (simulate processing)
-            shutil.copy2(input_file, output_file)
-            
-            # Add some metadata to show it was "processed"
-            with open(output_file + ".meta", 'w') as f:
-                f.write(f"Processed with {tape_type} preset\n")
-                f.write(f"Original: {input_file}\n")
-                f.write(f"Processed at: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-                f.write(f"Job ID: {job_id}\n")
-            
-            processed_files.append(output_file)
-            self.logger.info(f"MOCK: Processed {input_name} -> {output_name}")
-        
-        return processed_files
+
     
     def close(self):
         """Close Premiere Pro connection"""

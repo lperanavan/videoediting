@@ -119,7 +119,8 @@ class TopazHandler:
                       job_id: str = None, tape_type: str = "VHS") -> List[str]:
         """Enhance videos using Topaz Video AI"""
         if not self.enabled:
-            return self._mock_enhance_videos(input_files, output_dir, job_id, tape_type)
+            self.logger.warning("Topaz Video AI enhancement is disabled - no videos will be enhanced")
+            return []
         
         enhanced_files = []
         os.makedirs(output_dir, exist_ok=True)
@@ -274,47 +275,7 @@ class TopazHandler:
         
         return settings_file
     
-    def _mock_enhance_videos(self, input_files: List[str], output_dir: str, 
-                           job_id: str = None, tape_type: str = "VHS") -> List[str]:
-        """Mock video enhancement for testing without Topaz Video AI"""
-        self.logger.info(f"MOCK: Enhancing {len(input_files)} videos with Topaz AI ({tape_type})")
-        
-        os.makedirs(output_dir, exist_ok=True)
-        enhanced_files = []
-        
-        for i, input_file in enumerate(input_files):
-            if not os.path.exists(input_file):
-                self.logger.warning(f"MOCK: Input file not found: {input_file}")
-                continue
-            
-            # Create mock enhanced file
-            input_name = Path(input_file).stem
-            if job_id:
-                output_name = f"{job_id}_{input_name}_enhanced_{tape_type.lower()}.mp4"
-            else:
-                output_name = f"{input_name}_enhanced_{tape_type.lower()}.mp4"
-            
-            output_file = os.path.join(output_dir, output_name)
-            
-            # Copy input to output (simulate enhancement)
-            shutil.copy2(input_file, output_file)
-            
-            # Add enhancement metadata
-            with open(output_file + ".topaz", 'w') as f:
-                f.write(f"Enhanced with Topaz Video AI\n")
-                f.write(f"Model: {self.enhancement_models.get(tape_type, {}).get('model', 'Artemis')}\n")
-                f.write(f"Tape Type: {tape_type}\n")
-                f.write(f"Original: {input_file}\n")
-                f.write(f"Enhanced at: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-                f.write(f"Job ID: {job_id}\n")
-            
-            enhanced_files.append(output_file)
-            self.logger.info(f"MOCK: Enhanced {input_name} -> {output_name}")
-            
-            # Simulate processing time
-            time.sleep(1)
-        
-        return enhanced_files
+
     
     def get_available_models(self) -> List[str]:
         """Get list of available Topaz models"""

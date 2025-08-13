@@ -310,7 +310,6 @@
         <!-- Controls -->
         <div class="controls">
             <button class="btn btn-primary" onclick="showAddJobModal()">Add Custom Job</button>
-            <button class="btn btn-success" onclick="addTestJob()">Add Test Job</button>
             <button class="btn btn-primary" onclick="startProcessing()">Start Processing</button>
             <button class="btn btn-danger" onclick="stopProcessing()">Stop Processing</button>
             <button class="btn btn-primary refresh-btn" onclick="refreshData()">Refresh</button>
@@ -440,25 +439,6 @@
         }
 
         // API functions
-        async function addTestJob() {
-            try {
-                const response = await fetch('/api/add_test_job', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'}
-                });
-                const data = await response.json();
-                
-                if (data.success) {
-                    addLog(`Test job added: ${data.job_id}`);
-                    refreshData();
-                } else {
-                    addLog(`Error: ${data.error}`);
-                }
-            } catch (error) {
-                addLog(`Error adding test job: ${error.message}`);
-            }
-        }
-
         async function startProcessing() {
             if (isProcessing) {
                 addLog('Processing is already running');

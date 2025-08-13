@@ -431,3 +431,28 @@
 2025-08-13 11:55:08 | WARNING  | werkzeug             |  * Debugger is active!
 2025-08-13 11:55:08 | INFO     | werkzeug             |  * Debugger PIN: 117-673-496
 2025-08-13 11:55:44 | INFO     | werkzeug             | 127.0.0.1 - - [13/Aug/2025 11:55:44] "GET / HTTP/1.1" 200 -
+2025-08-13 12:00:37 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 12:00:37 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 12:00:49 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 12:00:49 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 12:00:49 | INFO     | werkzeug             | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-13 12:00:49 | INFO     | werkzeug             | [33mPress CTRL+C to quit[0m
+2025-08-13 12:00:49 | INFO     | werkzeug             |  * Restarting with watchdog (inotify)
+2025-08-13 12:00:49 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 12:00:49 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 12:00:49 | WARNING  | werkzeug             |  * Debugger is active!
+2025-08-13 12:00:49 | INFO     | werkzeug             |  * Debugger PIN: 117-673-496
+2025-08-13 12:01:11 | INFO     | werkzeug             | 127.0.0.1 - - [13/Aug/2025 12:01:11] "GET / HTTP/1.1" 200 -
+2025-08-13 12:03:22 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 12:03:22 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 12:04:10 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 12:04:10 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 12:04:10 | INFO     | werkzeug             | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-08-13 12:04:10 | INFO     | werkzeug             | [33mPress CTRL+C to quit[0m
+2025-08-13 12:04:10 | INFO     | werkzeug             |  * Restarting with watchdog (inotify)
+2025-08-13 12:04:10 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 12:04:10 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 12:04:10 | WARNING  | werkzeug             |  * Debugger is active!
+2025-08-13 12:04:10 | INFO     | werkzeug             |  * Debugger PIN: 117-673-496

@@ -280,24 +280,3 @@ class QueueManager:
             self._save_queue(queue_data)
             self.logger.info(f"Cleaned up {removed_count} old jobs (older than {days} days)")
     
-    def add_test_job(self, tape_type: str = "VHS") -> str:
-        """Add a test job for development purposes"""
-        test_job = {
-            "customer_id": "vniroshan@test.com",
-            "tape_type": tape_type,
-            "source_files": [
-                f"test_{tape_type.lower()}_video.mp4"
-            ],
-            "processing_options": {
-                "topaz_enhancement": False,
-                "output_resolution": "1080p",
-                "premiere_preset": f"{tape_type}_Cleanup"
-            },
-            "output_folder_id": "test_output_folder",
-            "metadata": {
-                "test_job": True,
-                "created_by": "test_runner"
-            }
-        }
-        
-        return self.add_job(test_job)

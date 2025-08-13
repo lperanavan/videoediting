@@ -59,8 +59,7 @@ class SetupManager:
             "config",
             "logs",
             "templates",
-            "static",
-            "tests/mock_data"
+            "static"
         ]
         
         for directory in directories:
@@ -151,29 +150,6 @@ class SetupManager:
             json.dump(gdrive_template, f, indent=2)
         
         print("  📄 config/gdrive_credentials_template.json")
-        
-        # Sample test data
-        test_data_file = self.project_root / "tests" / "mock_data" / "sample_videos.json"
-        test_data = {
-            "sample_videos": [
-                {
-                    "filename": "sample_vhs_tape.mp4",
-                    "tape_type": "VHS",
-                    "description": "Sample VHS tape conversion"
-                },
-                {
-                    "filename": "sample_minidv_tape.mp4", 
-                    "tape_type": "MiniDV",
-                    "description": "Sample MiniDV tape conversion"
-                }
-            ]
-        }
-        
-        with open(test_data_file, 'w') as f:
-            import json
-            json.dump(test_data, f, indent=2)
-        
-        print("  📄 tests/mock_data/sample_videos.json")
         print("✅ Sample files created")
     
     def setup_logging(self):

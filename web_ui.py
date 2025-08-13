@@ -174,20 +174,6 @@ def get_job_details(job_id):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
-@app.route('/api/add_test_job', methods=['POST'])
-def add_test_job():
-    """Add a test job to the queue"""
-    try:
-        data = request.get_json() or {}
-        tape_type = data.get('tape_type', 'VHS')
-
-        job_id = queue_manager.add_test_job(tape_type)
-        progress_tracker.add_log(f"Added test job: {job_id} ({tape_type})")
-
-        return jsonify({'success': True, 'job_id': job_id})
-    except Exception as e:
-        logger.error(f"Error adding test job: {e}")
-        return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/add_job', methods=['POST'])
 def add_job():
