@@ -438,3 +438,39 @@
 2025-08-13 10:48:37 | WARNING  | topaz_handler        | Topaz Video AI enhancement disabled
 2025-08-13 10:48:37 | INFO     | main                 | Video Processor Application initialized with optimizations
 2025-08-13 10:50:59 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 10:51:36 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 10:51:36 | INFO     | utils.config_manager | Configuration loaded from config/app_settings.json
+2025-08-13 10:51:36 | INFO     | utils.config_manager | Configuration validation passed
+2025-08-13 10:51:36 | INFO     | utils.shadow_pc_optimizer | Detecting GPU capabilities...
+2025-08-13 10:51:36 | INFO     | utils.shadow_pc_optimizer | Analyzing network conditions...
+2025-08-13 10:51:36 | INFO     | utils.shadow_pc_optimizer | Network analysis complete: {'latency_ms': 0.0, 'bandwidth_mbps': 100.0, 'is_high_latency': False, 'is_low_bandwidth': False}
+2025-08-13 10:51:36 | INFO     | utils.shadow_pc_optimizer | Applied environment-specific optimizations to configuration
+2025-08-13 10:51:36 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 10:51:36 | WARNING  | gdrive_handler       | Google Drive integration disabled or dependencies missing
+2025-08-13 10:51:36 | WARNING  | premiere_automation  | Premiere Pro automation disabled or COM not available
+2025-08-13 10:51:36 | WARNING  | topaz_handler        | Topaz Video AI enhancement disabled
+2025-08-13 10:51:36 | INFO     | main                 | Video Processor Application initialized with optimizations
+2025-08-13 10:51:49 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 10:51:49 | INFO     | utils.config_manager | Configuration loaded from config/app_settings.json
+2025-08-13 10:51:49 | INFO     | utils.config_manager | Configuration validation passed
+2025-08-13 10:51:49 | INFO     | utils.shadow_pc_optimizer | Detecting GPU capabilities...
+2025-08-13 10:51:49 | INFO     | utils.shadow_pc_optimizer | Analyzing network conditions...
+2025-08-13 10:51:49 | INFO     | utils.shadow_pc_optimizer | Network analysis complete: {'latency_ms': 0.0, 'bandwidth_mbps': 100.0, 'is_high_latency': False, 'is_low_bandwidth': False}
+2025-08-13 10:51:49 | INFO     | utils.shadow_pc_optimizer | Applied environment-specific optimizations to configuration
+2025-08-13 10:51:49 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 10:51:49 | WARNING  | gdrive_handler       | Google Drive integration disabled or dependencies missing
+2025-08-13 10:51:49 | WARNING  | premiere_automation  | Premiere Pro automation disabled or COM not available
+2025-08-13 10:51:49 | WARNING  | topaz_handler        | Topaz Video AI enhancement disabled
+2025-08-13 10:51:49 | INFO     | main                 | Video Processor Application initialized with optimizations
+2025-08-13 10:52:03 | INFO     | root                 | Logging initialized - Level: INFO, File: logs/video_processor.log
+2025-08-13 10:52:03 | INFO     | utils.config_manager | Configuration loaded from config/app_settings.json
+2025-08-13 10:52:03 | INFO     | utils.config_manager | Configuration validation passed
+2025-08-13 10:52:03 | INFO     | utils.shadow_pc_optimizer | Detecting GPU capabilities...
+2025-08-13 10:52:03 | INFO     | utils.shadow_pc_optimizer | Analyzing network conditions...
+2025-08-13 10:52:03 | INFO     | utils.shadow_pc_optimizer | Network analysis complete: {'latency_ms': 0.0, 'bandwidth_mbps': 100.0, 'is_high_latency': False, 'is_low_bandwidth': False}
+2025-08-13 10:52:03 | INFO     | utils.shadow_pc_optimizer | Applied environment-specific optimizations to configuration
+2025-08-13 10:52:03 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-13 10:52:03 | WARNING  | gdrive_handler       | Google Drive integration disabled or dependencies missing
+2025-08-13 10:52:03 | WARNING  | premiere_automation  | Premiere Pro automation disabled or COM not available
+2025-08-13 10:52:03 | WARNING  | topaz_handler        | Topaz Video AI enhancement disabled
+2025-08-13 10:52:03 | INFO     | main                 | Video Processor Application initialized with optimizations
