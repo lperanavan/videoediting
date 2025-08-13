@@ -1,0 +1,75 @@
+{
+  "version": "1.0.0",
+  "description": "Standard Windows configuration for video processing",
+  "created_for": "Standard Windows environment",
+  "directories": {
+    "input": "input_videos",
+    "output": "output_videos",
+    "temp": "temp", 
+    "presets": "presets",
+    "logs": "logs"
+  },
+  "processing": {
+    "max_concurrent_jobs": 2,
+    "polling_interval": 20,
+    "cleanup_temp_files": true,
+    "auto_detect_tape_type": true,
+    "fallback_to_ffmpeg": true,
+    "use_hardware_acceleration": true,
+    "network_aware_mode": false,
+    "chunk_processing": false,
+    "ffmpeg_timeout": 3600
+  },
+  "queue": {
+    "queue_file": "queue.json",
+    "backup_file": "queue_backup.json",
+    "max_failed_retries": 3,
+    "cleanup_completed_days": 30,
+    "retry_delay_seconds": 30
+  },
+  "gdrive": {
+    "enabled": false,
+    "credentials_file": "config/gdrive_credentials.json",
+    "upload_timeout": 3600,
+    "download_timeout": 3600,
+    "chunk_size": 1048576,
+    "retry_attempts": 2
+  },
+  "premiere": {
+    "enabled": false,
+    "presets_directory": "presets",
+    "temp_project_directory": "temp/premiere_projects",
+    "export_format": "H.264",
+    "export_quality": "High",
+    "connection_timeout": 30,
+    "project_open_timeout": 60,
+    "import_timeout": 120,
+    "export_timeout": 3600,
+    "processing_timeout": 1800
+  },
+  "topaz": {
+    "enabled": false,
+    "application_path": "C:\\Program Files\\Topaz Labs LLC\\Topaz Video AI\\Topaz Video AI.exe",
+    "temp_directory": "temp/topaz",
+    "models_directory": "",
+    "timeout": 7200
+  },
+  "detection": {
+    "ffmpeg_path": "ffmpeg",
+    "analysis_timeout": 120,
+    "confidence_threshold": 0.6,
+    "use_filename_hints": true
+  },
+  "web_ui": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "debug": false,
+    "secret_key": "change_this_secret_key"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/video_processor.log",
+    "max_size_mb": 10,
+    "backup_count": 5
+  }
+}

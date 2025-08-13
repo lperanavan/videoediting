@@ -92,7 +92,7 @@ class SetupManager:
             print("You may need to install them manually")
     
     def check_external_tools(self):
-        """Check for external tools"""
+        """Check for external tools with Windows-specific enhancements"""
         print("Checking external tools...")
         
         tools = {
@@ -105,27 +105,132 @@ class SetupManager:
                 print(f"  ✅ {tool} - {description}")
             else:
                 print(f"  ⚠️  {tool} not found - {description}")
+                if tool == "ffmpeg":
+                    self._suggest_ffmpeg_installation()
+        
+        # Windows-specific checks
+        if sys.platform == "win32":
+            self._check_windows_dependencies()
         
         # Check optional tools
-        optional_tools = {
-            "Premiere Pro": "C:\\Program Files\\Adobe\\Adobe Premiere Pro*",
-            "Topaz Video AI": "C:\\Program Files\\Topaz Labs LLC\\Topaz Video AI\\Topaz Video AI.exe"
-        }
+        self._check_optional_tools()
+
+    def _suggest_ffmpeg_installation(self):
+        """Suggest FFmpeg installation methods"""
+        print("    💡 To install FFmpeg:")
+        if sys.platform == "win32":
+            print("    - Download from https://ffmpeg.org/download.html")
+            print("    - Or use Chocolatey: choco install ffmpeg")
+            print("    - Or use winget: winget install Gyan.FFmpeg")
+        else:
+            print("    - Ubuntu/Debian: apt-get install ffmpeg")
+            print("    - macOS: brew install ffmpeg")
+
+    def _check_windows_dependencies(self):
+        """Check Windows-specific dependencies"""
+        print("\nWindows-specific dependencies:")
         
-        print("\nOptional tools:")
-        for tool, path in optional_tools.items():
+        # Check COM automation
+        try:
+            import win32com.client
+            import pythoncom
+            print("  ✅ pywin32 - Windows COM automation support")
+        except ImportError:
+            print("  ❌ pywin32 not found - Required for Adobe Premiere Pro automation")
+            print("    💡 Install with: pip install pywin32")
+        
+        # Check Windows Media Foundation
+        try:
+            import subprocess
+            result = subprocess.run(['reg', 'query', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\WindowsFeatures', '/v', 'WindowsMediaFormat-Runtime'], 
+                                  capture_output=True, text=True, timeout=10)
+            if result.returncode == 0:
+                print("  ✅ Windows Media Foundation - Media processing support")
+            else:
+                print("  ⚠️  Windows Media Foundation status unknown")
+        except Exception:
+            print("  ⚠️  Could not check Windows Media Foundation")
+        
+        # Check DirectShow filters
+        try:
+            result = subprocess.run(['reg', 'query', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\Filter'], 
+                                  capture_output=True, text=True, timeout=10)
+            if result.returncode == 0:
+                print("  ✅ DirectShow filters available")
+        except Exception:
+            print("  ⚠️  Could not check DirectShow filters")
+
+    def _check_optional_tools(self):
+        """Check optional tools with enhanced detection"""
+        print("\nOptional professional tools:")
+        
+        # Adobe Premiere Pro detection
+        premiere_paths = [
+            (r"C:\Program Files\Adobe\Adobe Premiere Pro 2025", "Adobe Premiere Pro 2025"),
+            (r"C:\Program Files\Adobe\Adobe Premiere Pro 2024", "Adobe Premiere Pro 2024"), 
+            (r"C:\Program Files\Adobe\Adobe Premiere Pro 2023", "Adobe Premiere Pro 2023"),
+            (r"C:\Program Files\Adobe\Adobe Premiere Pro CC*", "Adobe Premiere Pro CC")
+        ]
+        
+        premiere_found = False
+        for path, name in premiere_paths:
             if "*" in path:
                 # Check for any version
                 parent = Path(path).parent
                 if parent.exists() and any(parent.glob(Path(path).name)):
-                    print(f"  ✅ {tool} detected")
-                else:
-                    print(f"  ⚠️  {tool} not found")
+                    print(f"  ✅ {name} detected")
+                    premiere_found = True
+                    break
             else:
                 if Path(path).exists():
-                    print(f"  ✅ {tool} found")
-                else:
-                    print(f"  ⚠️  {tool} not found at {path}")
+                    print(f"  ✅ {name} found")
+                    premiere_found = True
+                    break
+        
+        if not premiere_found:
+            print("  ⚠️  Adobe Premiere Pro not found")
+            print("    💡 Download from Adobe Creative Cloud")
+        
+        # Topaz Video AI detection
+        topaz_paths = [
+            r"C:\Program Files\Topaz Labs LLC\Topaz Video AI\Topaz Video AI.exe",
+            r"C:\Program Files (x86)\Topaz Labs LLC\Topaz Video AI\Topaz Video AI.exe"
+        ]
+        
+        topaz_found = False
+        for path in topaz_paths:
+            if Path(path).exists():
+                print(f"  ✅ Topaz Video AI found at {path}")
+                topaz_found = True
+                break
+        
+        if not topaz_found:
+            print("  ⚠️  Topaz Video AI not found")
+            print("    💡 Download from https://www.topazlabs.com/video-ai")
+        
+        # Shadow PC detection
+        if sys.platform == "win32":
+            self._detect_shadow_pc()
+
+    def _detect_shadow_pc(self):
+        """Detect Shadow PC environment"""
+        try:
+            from utils.shadow_pc_optimizer import ShadowPCOptimizer
+            optimizer = ShadowPCOptimizer()
+            
+            if optimizer.is_shadow_pc():
+                print("  🌩️  Shadow PC environment detected")
+                gpu_info = optimizer.get_gpu_info()
+                if gpu_info:
+                    print(f"    GPU acceleration available: {list(gpu_info.keys())}")
+                network_info = optimizer.get_network_info()
+                if network_info.get('is_high_latency'):
+                    print("    High latency network detected - optimizations will be applied")
+            else:
+                print("  💻 Standard Windows environment")
+                
+        except Exception as e:
+            print(f"  ⚠️  Could not detect environment: {e}")
     
     def create_sample_files(self):
         """Create sample configuration and test files"""

@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "description": "Shadow PC optimized configuration for video processing",
+  "created_for": "Shadow PC environment",
+  "directories": {
+    "input": "input_videos",
+    "output": "output_videos", 
+    "temp": "temp",
+    "presets": "presets",
+    "logs": "logs"
+  },
+  "processing": {
+    "max_concurrent_jobs": 1,
+    "polling_interval": 30,
+    "cleanup_temp_files": true,
+    "auto_detect_tape_type": true,
+    "fallback_to_ffmpeg": true,
+    "use_hardware_acceleration": true,
+    "network_aware_mode": true,
+    "chunk_processing": true,
+    "timeout_multiplier": 2.0,
+    "prefer_local_processing": true,
+    "ffmpeg_timeout": 7200
+  },
+  "queue": {
+    "queue_file": "queue.json",
+    "backup_file": "queue_backup.json", 
+    "max_failed_retries": 5,
+    "cleanup_completed_days": 30,
+    "retry_delay_seconds": 60
+  },
+  "gdrive": {
+    "enabled": false,
+    "credentials_file": "config/gdrive_credentials.json",
+    "upload_timeout": 7200,
+    "download_timeout": 7200,
+    "chunk_size": 1048576,
+    "retry_attempts": 3,
+    "progressive_upload": true
+  },
+  "premiere": {
+    "enabled": false,
+    "presets_directory": "presets",
+    "temp_project_directory": "temp/premiere_projects",
+    "export_format": "H.264", 
+    "export_quality": "High",
+    "connection_timeout": 60,
+    "project_open_timeout": 120,
+    "import_timeout": 300,
+    "export_timeout": 7200,
+    "processing_timeout": 3600
+  },
+  "topaz": {
+    "enabled": false,
+    "application_path": "C:\\Program Files\\Topaz Labs LLC\\Topaz Video AI\\Topaz Video AI.exe",
+    "temp_directory": "temp/topaz",
+    "models_directory": "",
+    "timeout": 14400
+  },
+  "detection": {
+    "ffmpeg_path": "ffmpeg",
+    "analysis_timeout": 300,
+    "confidence_threshold": 0.6,
+    "use_filename_hints": true
+  },
+  "web_ui": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "debug": false,
+    "secret_key": "change_this_secret_key_for_shadow_pc"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/video_processor.log",
+    "max_size_mb": 50,
+    "backup_count": 10,
+    "structured_logging": true
+  },
+  "shadow_pc_optimizations": {
+    "detected_automatically": true,
+    "gpu_acceleration": "auto_detect",
+    "network_optimization": true,
+    "memory_optimization": true,
+    "io_optimization": true
+  }
+}
