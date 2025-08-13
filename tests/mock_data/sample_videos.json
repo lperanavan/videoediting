@@ -1,0 +1,14 @@
+{
+  "sample_videos": [
+    {
+      "filename": "sample_vhs_tape.mp4",
+      "tape_type": "VHS",
+      "description": "Sample VHS tape conversion"
+    },
+    {
+      "filename": "sample_minidv_tape.mp4",
+      "tape_type": "MiniDV",
+      "description": "Sample MiniDV tape conversion"
+    }
+  ]
+}

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Processing Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .status-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #3a3a3a;
+        }
+
+        .status-card h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .progress-section {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #3a3a3a;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #3a3a3a;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .logs-section {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #3a3a3a;
+        }
+
+        .logs-container {
+            height: 300px;
+            overflow-y: auto;
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .log-timestamp {
+            color: #888;
+            margin-right: 10px;
+        }
+
+        .queue-section {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #3a3a3a;
+        }
+
+        .job-item {
+            background: #3a3a3a;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+
+        .job-item.completed {
+            border-left-color: #28a745;
+        }
+
+        .job-item.failed {
+            border-left-color: #dc3545;
+        }
+
+        .job-item.processing {
+            border-left-color: #ffc107;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background: #2a2a2a;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-idle {
+            background: #6c757d;
+        }
+
+        .status-processing {
+            background: #ffc107;
+            animation: pulse 1s infinite;
+        }
+
+        .status-completed {
+            background: #28a745;
+        }
+
+        .status-failed {
+            background: #dc3545;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .refresh-btn {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Video Processing Dashboard</h1>
+            <p>Real-time monitoring for tape-to-digital conversion</p>
+        </div>
+
+        <!-- Status Overview -->
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>Current Status</h3>
+                <div id="current-status">
+                    <span class="status-indicator status-idle"></span>
+                    <span id="status-text">Idle</span>
+                </div>
+            </div>
+            <div class="status-card">
+                <h3>Pending Jobs</h3>
+                <div id="pending-count">0</div>
+            </div>
+            <div class="status-card">
+                <h3>Total Jobs</h3>
+                <div id="total-jobs">0</div>
+            </div>
+            <div class="status-card">
+                <h3>Current Job</h3>
+                <div id="current-job">None</div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h3>Processing Progress</h3>
+            <div id="progress-info">No job currently processing</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div id="progress-text">0%</div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn btn-primary" onclick="showAddJobModal()">Add Custom Job</button>
+            <button class="btn btn-success" onclick="addTestJob()">Add Test Job</button>
+            <button class="btn btn-primary" onclick="startProcessing()">Start Processing</button>
+            <button class="btn btn-danger" onclick="stopProcessing()">Stop Processing</button>
+            <button class="btn btn-primary refresh-btn" onclick="refreshData()">Refresh</button>
+        </div>
+
+        <!-- Logs Section -->
+        <div class="logs-section">
+            <h3>Activity Logs</h3>
+            <div class="logs-container" id="logs-container">
+                <div class="log-entry">
+                    <span class="log-timestamp">2025-08-11 12:59:23</span>
+                    Dashboard started - waiting for activity...
+                </div>
+            </div>
+        </div>
+
+        <!-- Queue Section -->
+        <div class="queue-section">
+            <h3>Job Queue</h3>
+            <div id="queue-container">
+                <p>No jobs in queue</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Job Modal -->
+    <div id="addJobModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddJobModal()">&times;</span>
+            <h3>Add Custom Job</h3>
+            <form id="addJobForm">
+                <div class="form-group">
+                    <label for="tapeType">Tape Type:</label>
+                    <select id="tapeType" required>
+                        <option value="VHS">VHS</option>
+                        <option value="MiniDV">MiniDV</option>
+                        <option value="Hi8">Hi8</option>
+                        <option value="Betamax">Betamax</option>
+                        <option value="Digital8">Digital8</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sourceFiles">Source File Name:</label>
+                    <input type="text" id="sourceFiles" placeholder="video_file.mp4" required>
+                </div>
+                <div class="form-group">
+                    <label for="outputResolution">Output Resolution:</label>
+                    <select id="outputResolution">
+                        <option value="720p">720p</option>
+                        <option value="1080p" selected>1080p</option>
+                        <option value="4K">4K</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="topazEnhancement"> Enable Topaz Enhancement
+                    </label>
+                </div>
+                <div class="controls">
+                    <button type="submit" class="btn btn-success">Add Job</button>
+                    <button type="button" class="btn btn-danger" onclick="closeAddJobModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Socket.IO connection
+        const socket = io();
+
+        // Global variables
+        let isProcessing = false;
+
+        // Socket event handlers
+        socket.on('connect', function() {
+            console.log('Connected to server');
+            addLog('Connected to dashboard');
+        });
+
+        socket.on('progress_update', function(data) {
+            updateProgress(data);
+        });
+
+        socket.on('log_update', function(data) {
+            addLogEntry(data);
+        });
+
+        // Update progress display
+        function updateProgress(data) {
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const currentJob = document.getElementById('current-job');
+            const statusText = document.getElementById('status-text');
+            const statusIndicator = document.querySelector('.status-indicator');
+            const progressInfo = document.getElementById('progress-info');
+
+            progressFill.style.width = data.progress + '%';
+            progressText.textContent = data.progress + '%';
+            currentJob.textContent = data.job_id || 'None';
+            statusText.textContent = data.status;
+            progressInfo.textContent = data.message || 'Processing...';
+
+            // Update status indicator
+            statusIndicator.className = 'status-indicator status-' + data.status;
+        }
+
+        // Add log entry to display
+        function addLogEntry(data) {
+            const logsContainer = document.getElementById('logs-container');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `
+                <span class="log-timestamp">${data.timestamp}</span>
+                ${data.message}
+            `;
+            
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        // Convenience function for adding logs
+        function addLog(message) {
+            addLogEntry({
+                timestamp: new Date().toLocaleTimeString(),
+                message: message
+            });
+        }
+
+        // API functions
+        async function addTestJob() {
+            try {
+                const response = await fetch('/api/add_test_job', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    addLog(`Test job added: ${data.job_id}`);
+                    refreshData();
+                } else {
+                    addLog(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                addLog(`Error adding test job: ${error.message}`);
+            }
+        }
+
+        async function startProcessing() {
+            if (isProcessing) {
+                addLog('Processing is already running');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/start_processing', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    isProcessing = true;
+                    addLog('Processing started');
+                } else {
+                    addLog(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                addLog(`Error starting processing: ${error.message}`);
+            }
+        }
+
+        async function stopProcessing() {
+            try {
+                const response = await fetch('/api/stop_processing', {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    isProcessing = false;
+                    addLog('Processing stopped');
+                } else {
+                    addLog(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                addLog(`Error stopping processing: ${error.message}`);
+            }
+        }
+
+        async function refreshData() {
+            try {
+                // Get queue data
+                const queueResponse = await fetch('/api/queue');
+                const queueData = await queueResponse.json();
+                
+                // Update queue display
+                document.getElementById('pending-count').textContent = queueData.pending_count;
+                document.getElementById('total-jobs').textContent = queueData.total_jobs;
+                
+                // Update queue list
+                const queueContainer = document.getElementById('queue-container');
+                if (queueData.recent_jobs.length > 0) {
+                    queueContainer.innerHTML = queueData.recent_jobs.map(job => `
+                        <div class="job-item ${job.status}">
+                            <strong>Job ${job.job_id.substring(0, 8)}...</strong> - ${job.tape_type || 'Unknown'}<br>
+                            Status: ${job.status} | Created: ${new Date(job.created_at).toLocaleString()}
+                        </div>
+                    `).join('');
+                } else {
+                    queueContainer.innerHTML = '<p>No jobs in queue</p>';
+                }
+                
+            } catch (error) {
+                addLog(`Error refreshing data: ${error.message}`);
+            }
+        }
+
+        // Modal functions
+        function showAddJobModal() {
+            document.getElementById('addJobModal').style.display = 'block';
+        }
+
+        function closeAddJobModal() {
+            document.getElementById('addJobModal').style.display = 'none';
+        }
+
+        // Add job form handler
+        document.getElementById('addJobForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                tape_type: document.getElementById('tapeType').value,
+                source_files: [document.getElementById('sourceFiles').value],
+                output_resolution: document.getElementById('outputResolution').value,
+                topaz_enhancement: document.getElementById('topazEnhancement').checked
+            };
+            
+            try {
+                const response = await fetch('/api/add_job', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    addLog(`Custom job added: ${data.job_id}`);
+                    closeAddJobModal();
+                    refreshData();
+                } else {
+                    addLog(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                addLog(`Error adding job: ${error.message}`);
+            }
+        });
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            addLog('Dashboard initialized');
+            refreshData();
+            
+            // Refresh data every 10 seconds
+            setInterval(refreshData, 10000);
+        });
+    </script>
+</body>
+</html>

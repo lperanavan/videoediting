@@ -1,0 +1,29 @@
+2025-08-13 03:40:33 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:40:36 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:40:43 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-13 03:41:01 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-13 03:42:41 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-13 03:45:56 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:47:55 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:47:58 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:48:01 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:49:55 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:53:06 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:53:07 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:53:09 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-13 03:53:13 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:55:41 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:56:30 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:58:14 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:58:16 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:58:19 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 03:58:35 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 04:00:31 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 04:00:33 | ERROR    | __main__             | Error starting processing: name 'os' is not defined
+2025-08-13 04:05:37 | ERROR    | __main__             | Error starting processing: signal only works in main thread of the main interpreter
+2025-08-13 04:06:08 | ERROR    | __main__             | Error starting processing: signal only works in main thread of the main interpreter
+2025-08-13 04:06:53 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-13 04:07:02 | ERROR    | __main__             | Error starting processing: signal only works in main thread of the main interpreter
+2025-08-13 10:31:49 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-13 10:31:56 | ERROR    | __main__             | Error starting processing: signal only works in main thread of the main interpreter
+2025-08-13 10:37:00 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
