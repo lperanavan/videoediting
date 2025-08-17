@@ -3712,3 +3712,25 @@ Exception: No files were uploaded. Check Google Drive folder sharing / quota.
 2025-08-17 14:19:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:19:41] "GET /api/queue HTTP/1.1" 200 -
 2025-08-17 14:19:51 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:19:51] "GET /api/queue HTTP/1.1" 200 -
 2025-08-17 14:20:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:20:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:21:15 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\queue_manager.py', reloading
+2025-08-17 14:21:20 | INFO     | werkzeug             |  * Restarting with watchdog (windowsapi)
+2025-08-17 14:21:23 | INFO     | root                 | Logging initialized - Level: INFO, File: logs\video_processor.log
+2025-08-17 14:21:23 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-17 14:21:23 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:21:23 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:21:23 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:21:24 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:21:24 | WARNING  | werkzeug             |  * Debugger is active!
+2025-08-17 14:21:24 | INFO     | werkzeug             |  * Debugger PIN: 398-778-523
+2025-08-17 14:21:24 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:21:24] "GET /socket.io/?EIO=4&transport=polling&t=PYuCHiu HTTP/1.1" 200 -
+2025-08-17 14:21:24 | INFO     | __main__             | Client connected: 127.0.0.1
+2025-08-17 14:21:24 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:21:24] "POST /socket.io/?EIO=4&transport=polling&t=PYuCI6R&sid=H7-9Y1VdUCXLYmJzAAAA HTTP/1.1" 200 -
+2025-08-17 14:21:24 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:21:24] "GET /socket.io/?EIO=4&transport=polling&t=PYuCI6i&sid=H7-9Y1VdUCXLYmJzAAAA HTTP/1.1" 200 -
+2025-08-17 14:21:24 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:21:24] "GET /socket.io/?EIO=4&transport=polling&t=PYuCIEs&sid=H7-9Y1VdUCXLYmJzAAAA HTTP/1.1" 200 -
+2025-08-17 14:21:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:21:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:22:13 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:22:13] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:22:21 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:22:21] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:22:31 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:22:31] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:22:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:22:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:22:51 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:22:51] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:23:01 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:23:01] "GET /api/queue HTTP/1.1" 200 -
