@@ -39,39 +39,64 @@ class VideoProcessorApp:
         # Setup logging first
         setup_logging()
         self.logger = logging.getLogger(__name__)
-        
+
         # Load configuration
         self.config_manager = ConfigManager(config_path)
         self.config = self.config_manager.get_config()
-        
-        # Setup directories
+
+        # Project root (folder containing this file)
+        self.project_root = Path(__file__).parent.resolve()
+
+        # Setup directories (will rewrite any relative or token paths to absolute under project root)
         self.setup_directories()
-        
+
         # Initialize components
         self.queue_manager = QueueManager(self.config.get("queue", {}))
         self.gdrive_handler = GDriveHandler(self.config.get("gdrive", {}))
         self.premiere_automation = PremiereAutomation(self.config.get("premiere", {}))
         self.topaz_handler = TopazHandler(self.config.get("topaz", {}))
         self.tape_detector = TapeDetector(self.config.get("detection", {}))
-        
+
         # Application state
         self.running = False
         self.current_job = None
         self.shutdown_event = threading.Event()
-        
+
         # Setup signal handlers for graceful shutdown (only if allowed)
         if setup_signals and can_setup_signal():
             signal.signal(signal.SIGINT, self._signal_handler)
             signal.signal(signal.SIGTERM, self._signal_handler)
-        
+
         self.logger.info("Video Processor Application initialized")
     
     def setup_directories(self):
         """Create necessary directories"""
         directories = self.config.get("directories", {})
+        resolved = {}
         for dir_name, dir_path in directories.items():
-            Path(dir_path).mkdir(parents=True, exist_ok=True)
-            self.logger.debug(f"Directory ready: {dir_path}")
+            try:
+                # Support token replacement
+                if isinstance(dir_path, str):
+                    dir_path = dir_path.replace('{PROJECT_ROOT}', str(self.project_root))
+                p = Path(dir_path)
+                # If relative, anchor to project root
+                if not p.is_absolute():
+                    p = self.project_root / p
+                # If absolute with a drive letter that doesn't exist on this machine, fallback to project root
+                if p.is_absolute() and p.drive and not Path(p.drive + '\\').exists():
+                    fallback = Path(__file__).parent / p.relative_to(p.anchor)
+                    self.logger.warning(
+                        f"Drive {p.drive} not found. Falling back directory '{dir_name}' to '{fallback}' instead of '{dir_path}'"
+                    )
+                    p = fallback
+                p.mkdir(parents=True, exist_ok=True)
+                resolved[dir_name] = str(p)
+                self.logger.debug(f"Directory ready: {p}")
+            except Exception as e:
+                self.logger.error(f"Failed to prepare directory {dir_name} ({dir_path}): {e}")
+        # Update config with resolved paths so rest of app uses them
+        if resolved:
+            self.config["directories"].update(resolved)
     
     def _signal_handler(self, signum, frame):
         """Handle shutdown signals gracefully"""

@@ -3735,3 +3735,70 @@ Exception: No files were uploaded. Check Google Drive folder sharing / quota.
 2025-08-17 14:22:51 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:22:51] "GET /api/queue HTTP/1.1" 200 -
 2025-08-17 14:23:01 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:23:01] "GET /api/queue HTTP/1.1" 200 -
 2025-08-17 14:23:11 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:23:11] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:23:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:23:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:24:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:24:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:25:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:25:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:26:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:26:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:27:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:27:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:28:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:28:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:29:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:29:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:30:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:30:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:31:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:31:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:32:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:32:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:32:55 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\setup.py', reloading
+2025-08-17 14:32:55 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\tape_detector.py', reloading
+2025-08-17 14:32:55 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\topaz_handler.py', reloading
+2025-08-17 14:32:55 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\utils\\config_manager.py', reloading
+2025-08-17 14:32:55 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\utils\\file_utils.py', reloading
+2025-08-17 14:32:55 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\utils\\logger.py', reloading
+2025-08-17 14:32:55 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\utils\\_init_.py', reloading
+2025-08-17 14:32:56 | INFO     | werkzeug             |  * Restarting with watchdog (windowsapi)
+2025-08-17 14:32:58 | INFO     | root                 | Logging initialized - Level: INFO, File: logs\video_processor.log
+2025-08-17 14:32:58 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-17 14:32:58 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:32:58 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:32:58 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:32:59 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:32:59 | WARNING  | werkzeug             |  * Debugger is active!
+2025-08-17 14:32:59 | INFO     | werkzeug             |  * Debugger PIN: 398-778-523
+2025-08-17 14:32:59 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:32:59] "GET /socket.io/?EIO=4&transport=polling&t=PYuExO7 HTTP/1.1" 200 -
+2025-08-17 14:32:59 | INFO     | __main__             | Client connected: 127.0.0.1
+2025-08-17 14:32:59 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:32:59] "POST /socket.io/?EIO=4&transport=polling&t=PYuExlm&sid=iImE-_nDWDDCNmtcAAAA HTTP/1.1" 200 -
+2025-08-17 14:32:59 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:32:59] "GET /socket.io/?EIO=4&transport=polling&t=PYuExm2&sid=iImE-_nDWDDCNmtcAAAA HTTP/1.1" 200 -
+2025-08-17 14:32:59 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:32:59] "GET /socket.io/?EIO=4&transport=polling&t=PYuExsJ&sid=iImE-_nDWDDCNmtcAAAA HTTP/1.1" 200 -
+2025-08-17 14:33:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:33:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:34:26 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\main.py', reloading
+2025-08-17 14:34:26 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\main.py', reloading
+2025-08-17 14:34:28 | INFO     | werkzeug             |  * Restarting with watchdog (windowsapi)
+2025-08-17 14:34:30 | INFO     | root                 | Logging initialized - Level: INFO, File: logs\video_processor.log
+2025-08-17 14:34:30 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-17 14:34:30 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:34:31 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:34:31 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:34:31 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:34:31 | WARNING  | werkzeug             |  * Debugger is active!
+2025-08-17 14:34:31 | INFO     | werkzeug             |  * Debugger PIN: 398-778-523
+2025-08-17 14:34:31 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:34:31] "GET /socket.io/?EIO=4&transport=polling&t=PYuFI5T HTTP/1.1" 200 -
+2025-08-17 14:34:31 | INFO     | __main__             | Client connected: 127.0.0.1
+2025-08-17 14:34:31 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:34:31] "POST /socket.io/?EIO=4&transport=polling&t=PYuFIIf&sid=_WEr--354UTXsjZtAAAA HTTP/1.1" 200 -
+2025-08-17 14:34:31 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:34:31] "GET /socket.io/?EIO=4&transport=polling&t=PYuFIJ1&sid=_WEr--354UTXsjZtAAAA HTTP/1.1" 200 -
+2025-08-17 14:34:32 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:34:32] "GET /socket.io/?EIO=4&transport=polling&t=PYuFIPn&sid=_WEr--354UTXsjZtAAAA HTTP/1.1" 200 -
+2025-08-17 14:34:40 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:34:40] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:35:10 | INFO     | werkzeug             |  * Detected change in 'C:\\Users\\thaya\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\pathlib.py', reloading
+2025-08-17 14:35:11 | INFO     | werkzeug             |  * Restarting with watchdog (windowsapi)
+2025-08-17 14:35:12 | INFO     | root                 | Logging initialized - Level: INFO, File: logs\video_processor.log
+2025-08-17 14:35:12 | INFO     | queue_manager        | Queue Manager initialized with file: queue.json
+2025-08-17 14:35:12 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:35:12 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:35:12 | INFO     | googleapiclient.discovery_cache | file_cache is only supported with oauth2client<4.0.0
+2025-08-17 14:35:12 | INFO     | gdrive_handler       | Google Drive service initialized successfully
+2025-08-17 14:35:12 | WARNING  | werkzeug             |  * Debugger is active!
+2025-08-17 14:35:12 | INFO     | werkzeug             |  * Debugger PIN: 398-778-523
+2025-08-17 14:35:13 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:35:13] "GET /socket.io/?EIO=4&transport=polling&t=PYuFSLS HTTP/1.1" 200 -
+2025-08-17 14:35:13 | INFO     | __main__             | Client connected: 127.0.0.1
+2025-08-17 14:35:13 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:35:13] "POST /socket.io/?EIO=4&transport=polling&t=PYuFSQQ&sid=MTEw2D-z26qm0nYyAAAA HTTP/1.1" 200 -
+2025-08-17 14:35:13 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:35:13] "GET /socket.io/?EIO=4&transport=polling&t=PYuFSQT&sid=MTEw2D-z26qm0nYyAAAA HTTP/1.1" 200 -
+2025-08-17 14:35:41 | INFO     | werkzeug             | 127.0.0.1 - - [17/Aug/2025 14:35:41] "GET /api/queue HTTP/1.1" 200 -
+2025-08-17 14:36:17 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\main.py', reloading
+2025-08-17 14:36:17 | INFO     | werkzeug             |  * Detected change in 'D:\\t2d\\VideoProcessorApp\\main.py', reloading
+2025-08-17 14:36:18 | INFO     | werkzeug             |  * Restarting with watchdog (windowsapi)
