@@ -27,3 +27,406 @@
 2025-08-13 10:31:49 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
 2025-08-13 10:31:56 | ERROR    | __main__             | Error starting processing: signal only works in main thread of the main interpreter
 2025-08-13 10:37:00 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-13 12:24:11 | ERROR    | queue_manager        | Error loading queue file: Expecting ',' delimiter: line 12 column 5 (char 206)
+2025-08-13 12:24:11 | ERROR    | queue_manager        | Error loading queue file: Expecting ',' delimiter: line 12 column 5 (char 206)
+2025-08-13 12:24:11 | ERROR    | queue_manager        | Error loading queue file: Expecting ',' delimiter: line 12 column 5 (char 206)
+2025-08-13 12:24:11 | ERROR    | queue_manager        | Error loading queue file: Expecting ',' delimiter: line 12 column 5 (char 206)
+2025-08-13 12:25:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:26:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:27:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:28:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:29:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:30:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:31:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:32:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:33:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:34:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:35:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:36:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:37:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:38:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:39:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:40:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:41:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:42:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:43:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:44:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:45:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:46:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:47:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:48:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:49:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:50:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:51:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:52:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:53:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:54:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:55:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:56:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:57:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:58:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 12:59:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:00:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:01:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:02:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:03:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:04:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:05:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:06:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:07:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:08:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:09:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:10:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:11:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:12:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:13:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:14:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:15:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:16:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:17:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:18:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:19:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:20:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:21:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:22:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:23:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:24:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:25:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:26:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:27:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:28:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:29:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:30:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:31:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:32:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:33:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:34:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:35:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:36:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:37:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:38:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:39:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:40:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:41:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:42:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:43:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:44:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:45:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:46:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:47:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 13:48:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-13 14:25:52 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:00:53 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:03 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:13 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:14 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:23 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:27 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:29 | ERROR    | __main__             | Error starting processing: 'GDriveHandler' object has no attribute 'initialize_service'
+2025-08-17 11:01:33 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:43 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:01:54 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:02:04 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:02:13 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:02:24 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:02:34 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:02:44 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:03:11 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:03:13 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:03:23 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:03:26 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-17 11:03:30 | ERROR    | __main__             | Error starting processing: 'GDriveHandler' object has no attribute 'initialize_service'
+2025-08-17 11:03:33 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:03:43 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:03:53 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:04:04 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:04:13 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:04:24 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:04:33 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:04:44 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:05:13 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:05:15 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:05:18 | ERROR    | __main__             | Error adding test job: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+2025-08-17 11:05:21 | ERROR    | __main__             | Error starting processing: 'GDriveHandler' object has no attribute 'initialize_service'
+2025-08-17 11:05:25 | ERROR    | __main__             | Error starting processing: 'GDriveHandler' object has no attribute 'initialize_service'
+2025-08-17 11:05:25 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:05:28 | ERROR    | __main__             | Error starting processing: 'GDriveHandler' object has no attribute 'initialize_service'
+2025-08-17 11:05:35 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:05:43 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:05:45 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:05:48 | ERROR    | __main__             | Error starting processing: 'GDriveHandler' object has no attribute 'initialize_service'
+2025-08-17 11:05:55 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:06:06 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:06:16 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:06:25 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:06:36 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:06:46 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:06:56 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:07:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:08:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:09:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:10:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:11:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:12:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:13:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:14:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:15:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:16:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:17:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:18:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:19:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:20:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:20:59 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:21:06 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:21:16 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:21:26 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:21:36 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:21:46 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:21:55 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:22:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:23:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:24:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:25:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:26:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:27:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:28:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:29:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:30:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:31:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:32:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:33:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:34:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:35:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:36:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:37:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:38:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:39:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:40:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:41:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:42:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:43:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:44:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:45:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:46:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:47:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:48:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:49:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:50:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:51:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:52:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:53:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:54:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:55:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:56:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:57:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:58:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:59:08 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:59:16 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:59:26 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:59:36 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:59:46 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 11:59:56 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:00:06 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:00:42 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:01:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:02:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:03:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:04:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:05:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:06:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:07:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:08:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:16:25 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:16:28 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:16:38 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:16:48 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:16:59 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:19:52 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:19:54 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:20:04 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:20:15 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:20:25 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:20:35 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:20:45 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:20:55 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:21:05 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:21:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:22:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:23:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:23:44 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:23:48 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:23:58 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:24:09 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:24:18 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:24:23 | ERROR    | __main__             | Error adding manual job: Missing required field: source_files
+2025-08-17 12:24:33 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:24:38 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:24:48 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:24:48 | ERROR    | __main__             | Error adding manual job: Missing required field: source_files
+2025-08-17 12:25:56 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:25:57 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:26:07 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:26:17 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:26:26 | ERROR    | __main__             | Error adding manual job: Missing required field: source_files
+2025-08-17 12:26:32 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:26:37 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:26:57 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:26:58 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:27:08 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:27:10 | ERROR    | __main__             | Error adding manual job: Missing required field: source_files
+2025-08-17 12:27:19 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:27:29 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:27:39 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:27:49 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:27:59 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:28:09 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:28:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:29:30 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:29:35 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:29:37 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:29:48 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:29:56 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:30:05 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:30:05 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:30:16 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:30:27 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:30:37 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:30:47 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:30:57 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:31:06 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:31:17 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:31:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:05 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:05 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:08 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:15 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:17 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:28 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:38 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:49 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:32:58 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:33:09 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:33:19 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:33:28 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:33:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:34:40 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:35:08 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:35:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:35:20 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:35:20 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:35:31 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:35:41 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:35:50 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:36:01 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 12:36:10 | ERROR    | __main__             | Error getting queue: 'status'
+2025-08-17 13:07:25 | ERROR    | gdrive_handler       | Error searching for file input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4: <HttpError 400 when requesting https://www.googleapis.com/drive/v3/files?q=name%3D%27input_videos%5Cy2mate.com+-+suriya+jyothika+love++suriya+jyothika+couple+trending+trendingshorts+viral+love_720p.mp4%27+and+trashed%3Dfalse&fields=files%28id%2C+name%29&pageSize=10&alt=json returned "Invalid Value". Details: "[{'message': 'Invalid Value', 'domain': 'global', 'reason': 'invalid', 'location': 'q', 'locationType': 'parameter'}]">
+2025-08-17 13:07:25 | ERROR    | gdrive_handler       | Could not resolve file identifier: input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4
+2025-08-17 13:07:25 | ERROR    | main                 | [cbdcb3c6-c8e3-4be6-8322-7c8401145ce9] Error processing job: Failed to download source files
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 141, in process_single_job
+    raise Exception("Failed to download source files")
+Exception: Failed to download source files
+2025-08-17 13:07:27 | ERROR    | gdrive_handler       | Error searching for file input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4: <HttpError 400 when requesting https://www.googleapis.com/drive/v3/files?q=name%3D%27input_videos%5Cy2mate.com+-+suriya+jyothika+love++suriya+jyothika+couple+trending+trendingshorts+viral+love_720p.mp4%27+and+trashed%3Dfalse&fields=files%28id%2C+name%29&pageSize=10&alt=json returned "Invalid Value". Details: "[{'message': 'Invalid Value', 'domain': 'global', 'reason': 'invalid', 'location': 'q', 'locationType': 'parameter'}]">
+2025-08-17 13:07:27 | ERROR    | gdrive_handler       | Could not resolve file identifier: input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4
+2025-08-17 13:07:27 | ERROR    | main                 | [105a798e-29a3-49f4-870b-cccb001d5212] Error processing job: Failed to download source files
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 141, in process_single_job
+    raise Exception("Failed to download source files")
+Exception: Failed to download source files
+2025-08-17 13:07:29 | ERROR    | gdrive_handler       | Error searching for file input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4: <HttpError 400 when requesting https://www.googleapis.com/drive/v3/files?q=name%3D%27input_videos%5Cy2mate.com+-+suriya+jyothika+love++suriya+jyothika+couple+trending+trendingshorts+viral+love_720p.mp4%27+and+trashed%3Dfalse&fields=files%28id%2C+name%29&pageSize=10&alt=json returned "Invalid Value". Details: "[{'message': 'Invalid Value', 'domain': 'global', 'reason': 'invalid', 'location': 'q', 'locationType': 'parameter'}]">
+2025-08-17 13:07:29 | ERROR    | gdrive_handler       | Could not resolve file identifier: input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4
+2025-08-17 13:07:29 | ERROR    | main                 | [4ecb655c-eb90-4cde-9bc4-f394f25fd119] Error processing job: Failed to download source files
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 141, in process_single_job
+    raise Exception("Failed to download source files")
+Exception: Failed to download source files
+2025-08-17 13:07:30 | ERROR    | gdrive_handler       | Error searching for file input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4: <HttpError 400 when requesting https://www.googleapis.com/drive/v3/files?q=name%3D%27input_videos%5Cy2mate.com+-+suriya+jyothika+love++suriya+jyothika+couple+trending+trendingshorts+viral+love_720p.mp4%27+and+trashed%3Dfalse&fields=files%28id%2C+name%29&pageSize=10&alt=json returned "Invalid Value". Details: "[{'message': 'Invalid Value', 'domain': 'global', 'reason': 'invalid', 'location': 'q', 'locationType': 'parameter'}]">
+2025-08-17 13:07:30 | ERROR    | gdrive_handler       | Could not resolve file identifier: input_videos\y2mate.com - suriya jyothika love  suriya jyothika couple trending trendingshorts viral love_720p.mp4
+2025-08-17 13:07:30 | ERROR    | main                 | [b58727d3-8cd2-4ed9-8be1-76198b4f3e6d] Error processing job: Failed to download source files
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 141, in process_single_job
+    raise Exception("Failed to download source files")
+Exception: Failed to download source files
+2025-08-17 13:16:46 | ERROR    | gdrive_handler       | Could not resolve file identifier: input_videos\test.mp4
+2025-08-17 13:16:46 | ERROR    | main                 | [6b8f12d4-d01d-4eb0-be28-6fbf93ed074c] Error processing job: Failed to download source files
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 141, in process_single_job
+    raise Exception("Failed to download source files")
+Exception: Failed to download source files
+2025-08-17 13:20:27 | ERROR    | gdrive_handler       | HTTP error uploading file D:/t2d/VideoProcessorApp/output_videos\51bf4714-1755-4bff-8b65-e9ec0921df5c_test_processed_vhs.mp4: <HttpError 403 when requesting None returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+2025-08-17 13:27:39 | ERROR    | gdrive_handler       | HTTP error uploading file D:/t2d/VideoProcessorApp/output_videos\16dcc2ad-2809-4b51-bcdc-a0fb6a1521ed_test_processed_vhs.mp4: <HttpError 403 when requesting None returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+2025-08-17 13:32:57 | ERROR    | gdrive_handler       | HTTP error uploading file (quota). Service accounts have no personal My Drive quota. Share a user-owned (or shared drive) folder with the service account and supply its folder ID in config.gdrive.default_output_folder_id or output_folder_id. Alternatively use a Shared Drive and enable 'supportsAllDrives'. Original error: <HttpError 403 when requesting None returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+2025-08-17 13:32:57 | ERROR    | main                 | [3fd4cbe7-340c-4103-b74c-4c19eb00f1e7] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 189, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 13:39:05 | ERROR    | gdrive_handler       | HTTP error uploading file (quota). Service accounts have no personal My Drive quota. Share a user-owned (or shared drive) folder with the service account and supply its folder ID in config.gdrive.default_output_folder_id or output_folder_id. Alternatively use a Shared Drive and enable 'supportsAllDrives'. Original error: <HttpError 403 when requesting None returned "Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.". Details: "[{'message': 'Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead.', 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]">
+2025-08-17 13:39:05 | ERROR    | main                 | [5da33bd1-50fb-4f64-bb18-1cd81c817be9] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 13:45:40 | ERROR    | gdrive_handler       | Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive.
+2025-08-17 13:45:40 | ERROR    | gdrive_handler       | Aborting upload: Service account cannot write to folder 1Oc5h5yN3xfDpg1duYNUUFSzvYsbo1Llr. Share the folder with store-customer-order-pics@tapes-to-digital-main-system.iam.gserviceaccount.com as Editor/Content Manager (or place it in a Shared Drive and share that).
+2025-08-17 13:45:40 | ERROR    | main                 | [74ce2660-fc56-4443-9f4d-1ae012813bc6] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 13:48:33 | ERROR    | gdrive_handler       | Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive.
+2025-08-17 13:48:33 | ERROR    | gdrive_handler       | Aborting upload: Service account cannot write to folder 1Oc5h5yN3xfDpg1duYNUUFSzvYsbo1Llr. Share the folder with store-customer-order-pics@tapes-to-digital-main-system.iam.gserviceaccount.com as Editor/Content Manager (or place it in a Shared Drive and share that).
+2025-08-17 13:48:33 | ERROR    | main                 | [1c8274f8-67f8-4cd0-89a3-76869ec1346d] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 13:49:38 | ERROR    | gdrive_handler       | Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive.
+2025-08-17 13:49:38 | ERROR    | gdrive_handler       | Aborting upload: Service account cannot write to folder 1WS2RS7y2uGWbbzYQ3vH57btCjKjFpLKe. Share the folder with store-customer-order-pics@tapes-to-digital-main-system.iam.gserviceaccount.com as Editor/Content Manager (or place it in a Shared Drive and share that).
+2025-08-17 13:49:38 | ERROR    | main                 | [57c3a4c1-ba72-40d9-a0e8-7fbb38b335dc] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 13:53:48 | ERROR    | gdrive_handler       | Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive.
+2025-08-17 13:53:48 | ERROR    | gdrive_handler       | Aborting upload: Service account cannot write to folder 1WS2RS7y2uGWbbzYQ3vH57btCjKjFpLKe. Share the folder with store-customer-order-pics@tapes-to-digital-main-system.iam.gserviceaccount.com as Editor/Content Manager (or place it in a Shared Drive and share that).
+2025-08-17 13:53:48 | ERROR    | main                 | [4f869801-c592-42e8-9eea-eae2eaf50f4f] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 14:00:38 | ERROR    | gdrive_handler       | Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive.
+2025-08-17 14:00:38 | ERROR    | gdrive_handler       | Aborting upload: Service account cannot write to folder 1WS2RS7y2uGWbbzYQ3vH57btCjKjFpLKe. Share the folder with store-customer-order-pics@tapes-to-digital-main-system.iam.gserviceaccount.com as Editor/Content Manager (or place it in a Shared Drive and share that).
+2025-08-17 14:00:38 | ERROR    | main                 | [716aae30-f834-4454-8a96-4c7803ce6231] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 14:04:51 | ERROR    | gdrive_handler       | Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive.
+2025-08-17 14:04:51 | ERROR    | gdrive_handler       | Aborting upload: Service account cannot write to folder 1WS2RS7y2uGWbbzYQ3vH57btCjKjFpLKe. Share the folder with store-customer-order-pics@tapes-to-digital-main-system.iam.gserviceaccount.com as Editor/Content Manager (or place it in a Shared Drive and share that).
+2025-08-17 14:04:51 | ERROR    | main                 | [1009ab1f-8f2d-4b33-bfae-f30213ae37a5] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.
+2025-08-17 14:07:18 | ERROR    | gdrive_handler       | Failed to get parent for file 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ: <HttpError 404 when requesting https://www.googleapis.com/drive/v3/files/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ?fields=parents&alt=json returned "File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.". Details: "[{'message': 'File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+2025-08-17 14:07:18 | ERROR    | gdrive_handler       | HTTP error downloading file 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ: <HttpError 404 when requesting https://www.googleapis.com/drive/v3/files/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ?fields=name%2Csize%2CmimeType%2Cparents&alt=json returned "File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.". Details: "[{'message': 'File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+2025-08-17 14:07:18 | ERROR    | main                 | [35f4a87a-541d-4a61-ae17-af13ed08d73d] Error processing job: Failed to download source files
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 141, in process_single_job
+    raise Exception("Failed to download source files")
+Exception: Failed to download source files
+2025-08-17 14:15:31 | ERROR    | gdrive_handler       | Failed to get parent for file 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ: <HttpError 404 when requesting https://www.googleapis.com/drive/v3/files/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ?fields=parents&alt=json returned "File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.". Details: "[{'message': 'File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+2025-08-17 14:15:32 | ERROR    | gdrive_handler       | HTTP error downloading file 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ: <HttpError 404 when requesting https://www.googleapis.com/drive/v3/files/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ?fields=name%2Csize%2CmimeType%2Cparents&alt=json returned "File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.". Details: "[{'message': 'File not found: 1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ.', 'domain': 'global', 'reason': 'notFound', 'location': 'fileId', 'locationType': 'parameter'}]">
+2025-08-17 14:15:32 | ERROR    | main                 | [2afb3f9e-36f8-410a-989e-8dab697ef233] Error processing job: Failed to download source files
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 141, in process_single_job
+    raise Exception("Failed to download source files")
+Exception: Failed to download source files
+2025-08-17 14:18:53 | ERROR    | gdrive_handler       | Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive.
+2025-08-17 14:18:53 | ERROR    | gdrive_handler       | Aborting upload: Service account cannot write to folder 1WS2RS7y2uGWbbzYQ3vH57btCjKjFpLKe. Share the folder with store-customer-order-pics@tapes-to-digital-main-system.iam.gserviceaccount.com as Editor/Content Manager (or place it in a Shared Drive and share that).
+2025-08-17 14:18:53 | ERROR    | main                 | [b8460a39-6a2e-46b5-8066-64f51faca5b0] Error processing job: No files were uploaded. Check Google Drive folder sharing / quota.
+Traceback (most recent call last):
+  File "D:\t2d\VideoProcessorApp\main.py", line 190, in process_single_job
+    raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+Exception: No files were uploaded. Check Google Drive folder sharing / quota.

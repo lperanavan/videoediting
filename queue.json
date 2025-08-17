@@ -1,15 +1,16 @@
 {
   "jobs": [
     {
-      "job_id": "fdb217e4-3fc7-40da-8a7e-0502b975be77",
-      "status": "pending",
-      "created_at": "2025-08-13T02:42:55.804926+00:00",
-      "updated_at": "2025-08-13T02:42:55.804926+00:00",
-      "customer_id": "vniroshan@shadowpc.com",
+      "job_id": "cbdcb3c6-c8e3-4be6-8322-7c8401145ce9",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T11:45:09.388656+00:00",
+      "updated_at": "2025-08-17T12:07:25.538157+00:00",
+      "customer_id": "manual_user",
       "tape_type": "VHS",
-      "source_files": [
-        "01 - Tape 1.mp4"
-      ],
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link",
+      "is_manual": true,
       "processing_options": {
         "topaz_enhancement": false,
         "output_resolution": "1080p",
@@ -17,22 +18,29 @@
         "custom_settings": {}
       },
       "output_folder_id": "processed_videos",
-      "priority": 5,
+      "priority": 3,
       "metadata": {
-        "added_via": "web_ui",
-        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-      }
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:07:24.852732+00:00",
+      "failed_at": "2025-08-17T12:07:25.444170+00:00",
+      "error_message": "Failed to download source files",
+      "completed_at": "2025-08-17T12:07:25.538157+00:00"
     },
     {
-      "job_id": "d7398758-5ac0-493e-8451-412838ffd5aa",
-      "status": "pending",
-      "created_at": "2025-08-13T03:06:00.494585+00:00",
-      "updated_at": "2025-08-13T03:06:00.494585+00:00",
-      "customer_id": "vniroshan@shadowpc.com",
+      "job_id": "105a798e-29a3-49f4-870b-cccb001d5212",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T11:49:18.718372+00:00",
+      "updated_at": "2025-08-17T12:07:27.722885+00:00",
+      "customer_id": "manual_user",
       "tape_type": "VHS",
-      "source_files": [
-        "01 - Tape 1.mp4"
-      ],
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link",
+      "is_manual": true,
       "processing_options": {
         "topaz_enhancement": false,
         "output_resolution": "1080p",
@@ -40,22 +48,29 @@
         "custom_settings": {}
       },
       "output_folder_id": "processed_videos",
-      "priority": 5,
+      "priority": 3,
       "metadata": {
-        "added_via": "web_ui",
-        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-      }
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:07:27.323635+00:00",
+      "failed_at": "2025-08-17T12:07:27.603319+00:00",
+      "error_message": "Failed to download source files",
+      "completed_at": "2025-08-17T12:07:27.722885+00:00"
     },
     {
-      "job_id": "4296d389-edf5-498c-ae91-3a0533fe6dbb",
-      "status": "pending",
-      "created_at": "2025-08-13T09:32:45.589344+00:00",
-      "updated_at": "2025-08-13T09:32:45.589344+00:00",
-      "customer_id": "vniroshan@shadowpc.com",
+      "job_id": "4ecb655c-eb90-4cde-9bc4-f394f25fd119",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T11:56:49.849741+00:00",
+      "updated_at": "2025-08-17T12:07:29.315122+00:00",
+      "customer_id": "manual_user",
       "tape_type": "VHS",
-      "source_files": [
-        "01.mp4"
-      ],
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link",
+      "is_manual": true,
       "processing_options": {
         "topaz_enhancement": false,
         "output_resolution": "1080p",
@@ -63,22 +78,29 @@
         "custom_settings": {}
       },
       "output_folder_id": "processed_videos",
-      "priority": 5,
+      "priority": 3,
       "metadata": {
-        "added_via": "web_ui",
-        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-      }
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:07:28.929069+00:00",
+      "failed_at": "2025-08-17T12:07:29.218897+00:00",
+      "error_message": "Failed to download source files",
+      "completed_at": "2025-08-17T12:07:29.315122+00:00"
     },
     {
-      "job_id": "f35a873a-9007-4ff6-81b7-8fff6143039e",
-      "status": "pending",
-      "created_at": "2025-08-13T09:37:12.540204+00:00",
-      "updated_at": "2025-08-13T09:37:12.540204+00:00",
-      "customer_id": "vniroshan@shadowpc.com",
+      "job_id": "b58727d3-8cd2-4ed9-8be1-76198b4f3e6d",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:02:13.465099+00:00",
+      "updated_at": "2025-08-17T12:07:31.117298+00:00",
+      "customer_id": "manual_user",
       "tape_type": "VHS",
-      "source_files": [
-        "01.MP4"
-      ],
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link",
+      "is_manual": true,
       "processing_options": {
         "topaz_enhancement": false,
         "output_resolution": "1080p",
@@ -86,16 +108,442 @@
         "custom_settings": {}
       },
       "output_folder_id": "processed_videos",
-      "priority": 5,
+      "priority": 3,
       "metadata": {
-        "added_via": "web_ui",
-        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-      }
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1J-q9QNRCsXOBHUdn_HWmsrWAejwA0zRB/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:07:30.675430+00:00",
+      "failed_at": "2025-08-17T12:07:30.984290+00:00",
+      "error_message": "Failed to download source files",
+      "completed_at": "2025-08-17T12:07:31.117298+00:00"
+    },
+    {
+      "job_id": "6b8f12d4-d01d-4eb0-be28-6fbf93ed074c",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:16:38.998877+00:00",
+      "updated_at": "2025-08-17T12:16:46.725929+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:16:46.275931+00:00",
+      "failed_at": "2025-08-17T12:16:46.642790+00:00",
+      "error_message": "Failed to download source files",
+      "completed_at": "2025-08-17T12:16:46.725929+00:00"
+    },
+    {
+      "job_id": "51bf4714-1755-4bff-8b65-e9ec0921df5c",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:20:18.120654+00:00",
+      "updated_at": "2025-08-17T12:20:27.273719+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:20:23.521485+00:00",
+      "completed_at": "2025-08-17T12:20:27.148970+00:00",
+      "output_files": [],
+      "processed_tape_type": "VHS"
+    },
+    {
+      "job_id": "16dcc2ad-2809-4b51-bcdc-a0fb6a1521ed",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:27:31.315918+00:00",
+      "updated_at": "2025-08-17T12:27:39.902598+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:27:36.693018+00:00",
+      "completed_at": "2025-08-17T12:27:39.815149+00:00",
+      "output_files": [],
+      "processed_tape_type": "VHS"
+    },
+    {
+      "job_id": "3fd4cbe7-340c-4103-b74c-4c19eb00f1e7",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:32:47.935166+00:00",
+      "updated_at": "2025-08-17T12:32:57.789291+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:32:54.401232+00:00",
+      "failed_at": "2025-08-17T12:32:57.696569+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T12:32:57.789291+00:00"
+    },
+    {
+      "job_id": "5da33bd1-50fb-4f64-bb18-1cd81c817be9",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:38:57.025952+00:00",
+      "updated_at": "2025-08-17T12:39:05.665559+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:39:02.677853+00:00",
+      "failed_at": "2025-08-17T12:39:05.563970+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T12:39:05.665559+00:00"
+    },
+    {
+      "job_id": "74ce2660-fc56-4443-9f4d-1ae012813bc6",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:45:28.160491+00:00",
+      "updated_at": "2025-08-17T12:45:40.213846+00:00",
+      "customer_id": "manual_user",
+      "tape_type": null,
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:45:35.824081+00:00",
+      "failed_at": "2025-08-17T12:45:40.146067+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T12:45:40.213846+00:00"
+    },
+    {
+      "job_id": "1c8274f8-67f8-4cd0-89a3-76869ec1346d",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:48:22.423792+00:00",
+      "updated_at": "2025-08-17T12:48:33.444757+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:48:29.051593+00:00",
+      "failed_at": "2025-08-17T12:48:33.374887+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T12:48:33.444757+00:00"
+    },
+    {
+      "job_id": "57c3a4c1-ba72-40d9-a0e8-7fbb38b335dc",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:49:32.931544+00:00",
+      "updated_at": "2025-08-17T12:49:38.468428+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:49:34.287588+00:00",
+      "failed_at": "2025-08-17T12:49:38.373331+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T12:49:38.468428+00:00"
+    },
+    {
+      "job_id": "4f869801-c592-42e8-9eea-eae2eaf50f4f",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T12:53:42.114457+00:00",
+      "updated_at": "2025-08-17T12:53:48.440167+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T12:53:45.119675+00:00",
+      "failed_at": "2025-08-17T12:53:48.341110+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T12:53:48.440167+00:00"
+    },
+    {
+      "job_id": "716aae30-f834-4454-8a96-4c7803ce6231",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T13:00:28.594499+00:00",
+      "updated_at": "2025-08-17T13:00:38.133432+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T13:00:33.864942+00:00",
+      "failed_at": "2025-08-17T13:00:38.036751+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T13:00:38.133432+00:00"
+    },
+    {
+      "job_id": "1009ab1f-8f2d-4b33-bfae-f30213ae37a5",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T13:04:40.902054+00:00",
+      "updated_at": "2025-08-17T13:04:52.054631+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T13:04:47.709074+00:00",
+      "failed_at": "2025-08-17T13:04:51.852304+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T13:04:52.054631+00:00"
+    },
+    {
+      "job_id": "35f4a87a-541d-4a61-ae17-af13ed08d73d",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T13:07:15.708733+00:00",
+      "updated_at": "2025-08-17T13:07:19.027146+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T13:07:18.372131+00:00",
+      "failed_at": "2025-08-17T13:07:18.930854+00:00",
+      "error_message": "Failed to download source files",
+      "completed_at": "2025-08-17T13:07:19.027146+00:00"
+    },
+    {
+      "job_id": "2afb3f9e-36f8-410a-989e-8dab697ef233",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T13:15:28.443132+00:00",
+      "updated_at": "2025-08-17T13:15:32.548492+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1M3eOAbUE1TDYWqa0uPELm95Abr7m3bgZ/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T13:15:31.799051+00:00",
+      "failed_at": "2025-08-17T13:15:32.442449+00:00",
+      "error_message": "Failed to download source files",
+      "completed_at": "2025-08-17T13:15:32.548492+00:00"
+    },
+    {
+      "job_id": "b8460a39-6a2e-46b5-8066-64f51faca5b0",
+      "status": "completed",
+      "progress": 0,
+      "created_at": "2025-08-17T13:18:47.430169+00:00",
+      "updated_at": "2025-08-17T13:18:53.262521+00:00",
+      "customer_id": "manual_user",
+      "tape_type": "VHS",
+      "source_files": [],
+      "drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link",
+      "is_manual": true,
+      "processing_options": {
+        "topaz_enhancement": false,
+        "output_resolution": "1080p",
+        "premiere_preset": "auto",
+        "custom_settings": {}
+      },
+      "output_folder_id": "processed_videos",
+      "priority": 3,
+      "metadata": {
+        "added_via": "web_ui_manual",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        "original_drive_link": "https://drive.google.com/file/d/1ICP8vf7x-7kyNRJcUMrdougm-0XVRfN5/view?usp=drive_link"
+      },
+      "error": null,
+      "started_at": "2025-08-17T13:18:48.966284+00:00",
+      "failed_at": "2025-08-17T13:18:53.154572+00:00",
+      "error_message": "No files were uploaded. Check Google Drive folder sharing / quota.",
+      "completed_at": "2025-08-17T13:18:53.262521+00:00"
     }
   ],
   "metadata": {
     "created_at": "2025-08-11T14:04:45.477313+00:00",
     "version": "1.0",
-    "last_updated": "2025-08-13T09:37:12.543208+00:00"
+    "last_updated": "2025-08-17T13:21:03.966979+00:00"
   }
 }

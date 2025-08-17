@@ -1,13 +1,11 @@
 {
   "version": "1.0.0",
-  "created_at": "2025-08-11T13:24:14Z",
-  "created_by": "vniroshan",
   "directories": {
-    "input": "input_videos",
-    "output": "output_videos",
-    "temp": "temp",
-    "presets": "presets",
-    "logs": "logs"
+    "input": "D:/t2d/VideoProcessorApp/input_videos",
+    "output": "D:/t2d/VideoProcessorApp/output_videos",
+    "temp": "D:/t2d/VideoProcessorApp/temp",
+    "presets": "D:/t2d/VideoProcessorApp/presets",
+    "logs": "D:/t2d/VideoProcessorApp/logs"
   },
   "processing": {
     "max_concurrent_jobs": 1,
@@ -23,11 +21,16 @@
     "cleanup_completed_days": 30
   },
   "gdrive": {
-    "enabled": false,
-    "credentials_file": "config/gdrive_credentials.json",
+    "enabled": true,
+    "credentials_file": "D:/t2d/VideoProcessorApp/config/gdrive_credentials.json",
     "upload_timeout": 3600,
     "download_timeout": 3600,
-    "chunk_size": 1048576
+    "chunk_size": 1048576,
+    "default_output_folder_id": "0AEhJhSNnzyd_Uk9PVA",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive.file",
+      "https://www.googleapis.com/auth/drive.readonly"
+    ]
   },
   "premiere": {
     "enabled": false,

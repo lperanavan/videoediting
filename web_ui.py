@@ -12,6 +12,8 @@ import logging
 from pathlib import Path
 import sys
 import os
+import json
+from typing import Dict, Any, Optional
 
 # Add project root to path
 project_root = Path(__file__).parent
@@ -25,6 +27,7 @@ logger = logging.getLogger(__name__)
 try:
     from queue_manager import QueueManager
     from main import VideoProcessorApp
+    from gdrive_handler import GDriveHandler
     from utils.logger import setup_logging
     from utils.config_manager import ConfigManager
 except ImportError as e:
@@ -41,7 +44,9 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 # Global variables
 config_path = os.path.join(project_root, "config", "app_settings.json")
 config_manager = ConfigManager(config_path)
-queue_manager = QueueManager(config_manager.get_config().get("queue", {}))
+config = config_manager.get_config()
+queue_manager = QueueManager(config.get("queue", {}))
+gdrive = GDriveHandler(config.get("gdrive", {}))
 processor_app = None
 processing_thread = None
 is_processing = False
@@ -117,38 +122,139 @@ def dashboard():
 def get_status():
     """Get comprehensive system status"""
     try:
-        queue_stats = queue_manager.get_queue_stats()
-        processor_status = processor_app.get_status() if processor_app else {}
+        # Get queue stats with fallback
+        try:
+            queue_stats = queue_manager.get_queue_stats()
+        except:
+            queue_stats = {
+                'pending_count': 0,
+                'completed_count': 0,
+                'failed_count': 0,
+                'total_jobs': 0
+            }
+
+        # Get processor status with fallback
+        try:
+            processor_status = processor_app.get_status() if processor_app else {}
+        except:
+            processor_status = {'status': 'unknown'}
+
+        # Get progress tracker status with fallback
+        try:
+            processing_status = progress_tracker.get_status()
+        except:
+            processing_status = {
+                'current_job': None,
+                'progress': 0,
+                'status': 'idle',
+                'step': '',
+                'eta': None,
+                'is_processing': False
+            }
 
         return jsonify({
             'success': True,
-            'processing': progress_tracker.get_status(),
+            'processing': processing_status,
             'queue': queue_stats,
             'system': processor_status,
             'timestamp': datetime.now().isoformat()
         })
     except Exception as e:
         logger.error(f"Error getting status: {e}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'processing': {
+                'current_job': None,
+                'progress': 0,
+                'status': 'error',
+                'step': '',
+                'eta': None,
+                'is_processing': False
+            },
+            'queue': {
+                'pending_count': 0,
+                'completed_count': 0,
+                'failed_count': 0,
+                'total_jobs': 0
+            },
+            'system': {'status': 'error'},
+            'timestamp': datetime.now().isoformat()
+        }), 500
 
 @app.route('/api/queue')
 def get_queue():
     """Get queue information"""
     try:
-        pending_jobs = queue_manager.get_pending_jobs(limit=50)
-        recent_jobs = queue_manager.get_jobs_by_status("completed", limit=20)
-        failed_jobs = queue_manager.get_jobs_by_status("failed", limit=10)
+        queue_stats = queue_manager.get_queue_stats() if hasattr(queue_manager, 'get_queue_stats') else {
+            'pending_count': 0,
+            'completed_count': 0,
+            'failed_count': 0,
+            'total_jobs': 0
+        }
+
+        # Get jobs with proper error handling
+        try:
+            pending_jobs = queue_manager.get_pending_jobs(limit=50)
+        except:
+            pending_jobs = []
+
+        try:
+            recent_jobs = queue_manager.get_jobs_by_status("completed", limit=20)
+        except:
+            recent_jobs = []
+
+        try:
+            failed_jobs = queue_manager.get_jobs_by_status("failed", limit=10)
+        except:
+            failed_jobs = []
+
+        # Format job data to ensure all required fields are present
+        def format_job(job):
+            if isinstance(job, dict):
+                return {
+                    'job_id': job.get('job_id', 'unknown'),
+                    'status': job.get('status', 'unknown'),
+                    'tape_type': job.get('tape_type', 'Unknown'),
+                    'created_at': job.get('created_at', ''),
+                    'progress': job.get('progress', 0),
+                    'is_manual': job.get('is_manual', False),
+                    'drive_link': job.get('drive_link', '') if job.get('is_manual') else ''
+                }
+            return None
+
+        # Filter out None values and format jobs
+        pending_jobs = [format_job(job) for job in pending_jobs if job]
+        recent_jobs = [format_job(job) for job in recent_jobs if job]
+        failed_jobs = [format_job(job) for job in failed_jobs if job]
 
         return jsonify({
             'success': True,
             'pending_jobs': pending_jobs,
             'recent_completed': recent_jobs,
+            'recent_jobs': recent_jobs,  # alias for front-end code expecting recent_jobs
             'recent_failed': failed_jobs,
-            'stats': queue_manager.get_queue_stats()
+            'stats': queue_stats,
+            'pending_count': len(pending_jobs),
+            'total_jobs': len(pending_jobs) + len(recent_jobs) + len(failed_jobs)
         })
     except Exception as e:
         logger.error(f"Error getting queue: {e}")
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'pending_jobs': [],
+            'recent_completed': [],
+            'recent_failed': [],
+            'stats': {
+                'pending_count': 0,
+                'completed_count': 0,
+                'failed_count': 0,
+                'total_jobs': 0
+            },
+            'pending_count': 0,
+            'total_jobs': 0
+        }), 500
 
 @app.route('/api/logs')
 def get_logs():
@@ -189,6 +295,83 @@ def add_test_job():
         logger.error(f"Error adding test job: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/api/add_manual_job', methods=['POST'])
+def add_manual_job():
+    """Add a manual job using Google Drive link"""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'No data provided'}), 400
+
+        if not data.get('drive_link'):
+            return jsonify({'success': False, 'error': 'drive_link is required'}), 400
+
+        job_data = {
+            "customer_id": data.get('customer_id', 'manual_user'),
+            "tape_type": data.get('tape_type'),  # Can be None, will be detected later
+            "drive_link": data.get('drive_link'),
+            "source_files": [],  # Empty list for manual jobs
+            "is_manual": True,
+            "processing_options": {
+                "topaz_enhancement": data.get('topaz_enhancement', False),
+                "output_resolution": data.get('output_resolution', '1080p'),
+                "premiere_preset": data.get('premiere_preset', 'auto'),
+                "custom_settings": data.get('custom_settings', {})
+            },
+            "output_folder_id": data.get('output_folder_id', 'processed_videos'),
+            "priority": data.get('priority', 3),
+            "metadata": {
+                "added_via": "web_ui_manual",
+                "user_agent": request.headers.get('User-Agent', 'unknown'),
+                "original_drive_link": data.get('drive_link')  # Store the original link
+            }
+        }
+
+        job_id = queue_manager.add_job(job_data)
+        progress_tracker.add_log(
+            f"Added manual job: {job_id} - Drive link processing"
+        )
+
+        return jsonify({'success': True, 'job_id': job_id})
+    except Exception as e:
+        logger.error(f"Error adding manual job: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+        if not data.get('drive_link'):
+            return jsonify({'success': False, 'error': 'drive_link is required'}), 400
+        
+        # If tape_type is not provided, it will be detected automatically
+        tape_type = data.get('tape_type')
+        drive_link = data['drive_link']
+        
+        job_data = {
+            "customer_id": data.get('customer_id', 'manual_process'),
+            "tape_type": tape_type,  # Can be None, will be detected later
+            "drive_link": drive_link,
+            "is_manual": True,
+            "processing_options": {
+                "topaz_enhancement": data.get('topaz_enhancement', False),
+                "output_resolution": data.get('output_resolution', '1080p'),
+                "premiere_preset": data.get('premiere_preset', 'auto'),
+                "custom_settings": data.get('custom_settings', {})
+            },
+            "output_folder_id": data.get('output_folder_id', 'processed_videos'),
+            "priority": data.get('priority', 3),  # Higher priority for manual jobs
+            "metadata": {
+                "added_via": "web_ui_manual",
+                "user_agent": request.headers.get('User-Agent', 'unknown')
+            }
+        }
+
+        job_id = queue_manager.add_job(job_data)
+        progress_tracker.add_log(
+            f"Added manual job: {job_id} (Drive link: {drive_link})"
+        )
+
+        return jsonify({'success': True, 'job_id': job_id})
+    except Exception as e:
+        logger.error(f"Error adding manual job: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @app.route('/api/add_job', methods=['POST'])
 def add_job():
     """Add a custom job to the queue"""
@@ -197,9 +380,33 @@ def add_job():
         if not data:
             return jsonify({'success': False, 'error': 'No data provided'}), 400
 
-        # Validate required fields
+        # For manual jobs with drive_link
+        if data.get('drive_link'):
+            job_data = {
+                "customer_id": data.get('customer_id', 'manual_user'),
+                "tape_type": data.get('tape_type'),
+                "drive_link": data.get('drive_link'),
+                "is_manual": True,
+                "processing_options": {
+                    "topaz_enhancement": data.get('topaz_enhancement', False),
+                    "output_resolution": data.get('output_resolution', '1080p'),
+                    "premiere_preset": data.get('premiere_preset', 'auto'),
+                    "custom_settings": data.get('custom_settings', {})
+                },
+                "output_folder_id": data.get('output_folder_id', 'processed_videos'),
+                "priority": data.get('priority', 3),
+                "metadata": {
+                    "added_via": "web_ui_manual",
+                    "user_agent": request.headers.get('User-Agent', 'unknown')
+                }
+            }
+            job_id = queue_manager.add_job(job_data)
+            progress_tracker.add_log(f"Added manual job: {job_id} (Drive link: {data['drive_link']})")
+            return jsonify({'success': True, 'job_id': job_id})
+
+        # For automated jobs with source_files
         if not data.get('source_files'):
-            return jsonify({'success': False, 'error': 'source_files is required'}), 400
+            return jsonify({'success': False, 'error': 'Either drive_link or source_files is required'}), 400
 
         job_data = {
             "customer_id": data.get('customer_id', 'vniroshan@shadowpc.com'),
@@ -239,94 +446,153 @@ def start_processing():
         return jsonify({'success': False, 'error': 'Processing already running'})
 
     try:
+        # Collect current pending jobs (not mandatory to have any to start)
+        jobs = getattr(queue_manager, 'get_all_jobs', lambda: [])()
+        pending_jobs = [job for job in jobs if job.get('status') == 'pending']
+
         is_processing = True
-        logger.debug("Creating VideoProcessorApp instance...")
+        logger.info("Starting video processing engine...")
         config_path = os.path.join(project_root, "config", "app_settings.json")
         processor_app = VideoProcessorApp(config_path)
-        logger.debug("VideoProcessorApp instance created successfully")
+        logger.info("Processing engine initialized successfully")
 
         original_process_single_job = processor_app.process_single_job
 
         def enhanced_process_single_job(job):
             job_id = job['job_id']
-            tape_type = job.get('tape_type', 'Unknown')
+            tape_type = job.get('tape_type')
+            is_manual = job.get('is_manual', False)
+            drive_link = job.get('drive_link')
+
             try:
+                logger.info(f"Starting job {job_id}")
                 progress_tracker.update_progress(
                     job_id, 0, "starting",
-                    f"Starting job {job_id} ({tape_type})",
+                    f"Starting job {job_id}",
                     "Initializing"
                 )
-                time.sleep(1)
 
-                progress_tracker.update_progress(
-                    job_id, 10, "downloading",
-                    "Downloading source files from Google Drive...",
-                    "Download"
-                )
-                time.sleep(2)
+                # Handle manual jobs (Google Drive)
+                if is_manual and drive_link:
+                    try:
+                        # Auto-detect tape type if not specified
+                        if not tape_type:
+                            progress_tracker.update_progress(
+                                job_id, 5, "detecting",
+                                f"Detecting tape type for job {job_id}",
+                                "Tape Detection"
+                            )
+                            filename = os.path.basename(drive_link)
+                            tape_types = ['VHS', 'MiniDV', 'Hi8', 'Betamax', 'Digital8', 'Super8']
+                            for t_type in tape_types:
+                                if t_type.lower() in filename.lower():
+                                    tape_type = t_type
+                                    break
+                            if not tape_type:
+                                tape_type = 'VHS'  # Default to VHS if detection fails
+                            
+                            logger.info(f"Job {job_id}: Detected tape type as {tape_type}")
+                            job['tape_type'] = tape_type
+                            progress_tracker.update_progress(
+                                job_id, 10, "detected",
+                                f"Detected tape type: {tape_type}",
+                                "Tape Detection"
+                            )
+                    except Exception as e:
+                        error_msg = f"Failed to detect tape type: {str(e)}"
+                        logger.error(error_msg)
+                        progress_tracker.update_progress(
+                            job_id, 0, "failed",
+                            error_msg,
+                            "Error"
+                        )
+                        raise
+                    # Extract file ID and set as source so original processor downloads it
+                    try:
+                        file_id = gdrive._extract_file_id_from_url(drive_link) if hasattr(gdrive, '_extract_file_id_from_url') else None
+                        if file_id:
+                            job['source_files'] = [file_id]
+                            # Set output folder to parent of original file if available
+                            if hasattr(gdrive, 'get_file_parent'):
+                                parent_id = gdrive.get_file_parent(file_id)
+                                if parent_id:
+                                    job['output_folder_id'] = parent_id
+                        else:
+                            raise ValueError("Could not extract file ID from Drive link")
+                    except Exception as e:
+                        error_msg = f"Failed to prepare manual job download: {e}"
+                        progress_tracker.update_progress(
+                            job_id, 0, "failed",
+                            error_msg,
+                            "Error"
+                        )
+                        queue_manager.update_job_status(job_id, "failed", error=error_msg)
+                        return
 
-                progress_tracker.update_progress(
-                    job_id, 20, "downloading",
-                    "Download completed",
-                    "Download"
-                )
-
-                progress_tracker.update_progress(
-                    job_id, 25, "analyzing",
-                    "Analyzing video files and detecting tape type...",
-                    "Analysis"
-                )
-                time.sleep(1.5)
-
-                progress_tracker.update_progress(
-                    job_id, 30, "processing",
-                    f"Processing with Adobe Premiere Pro ({tape_type} preset)...",
-                    "Premiere Pro"
-                )
-                time.sleep(3)
-
-                progress_tracker.update_progress(
-                    job_id, 50, "processing",
-                    "Applying video corrections and filters...",
-                    "Premiere Pro"
-                )
-                time.sleep(2)
-
-                progress_tracker.update_progress(
-                    job_id, 70, "processing",
-                    "Rendering processed video...",
-                    "Premiere Pro"
-                )
-                time.sleep(2)
-
-                if job.get('processing_options', {}).get('topaz_enhancement'):
+                # Start the actual processing for all jobs (manual and automated)
+                # Validate source files exist
+                if not job.get('source_files'):
+                    error_msg = "No source files available for processing"
                     progress_tracker.update_progress(
-                        job_id, 75, "enhancing",
-                        "Enhancing video quality with Topaz Video AI...",
-                        "Topaz AI"
+                        job_id, 0, "failed",
+                        error_msg,
+                        "Error"
                     )
-                    time.sleep(3)
+                    job['error'] = error_msg
+                    queue_manager.update_job_status(job_id, "failed", error=error_msg)
+                    return
 
+                try:
+                    # Analysis phase
                     progress_tracker.update_progress(
-                        job_id, 85, "enhancing",
-                        "Topaz enhancement completed",
-                        "Topaz AI"
+                        job_id, 25, "analyzing",
+                        "Analyzing video files...",
+                        "Analysis"
                     )
 
-                progress_tracker.update_progress(
-                    job_id, 90, "uploading",
-                    "Uploading processed videos to Google Drive...",
-                    "Upload"
-                )
-                time.sleep(2)
+                    # Processing with Premiere Pro
+                    progress_tracker.update_progress(
+                        job_id, 30, "processing",
+                        f"Processing with Adobe Premiere Pro ({tape_type} preset)...",
+                        "Premiere Pro"
+                    )
 
-                result = original_process_single_job(job)
+                    # Call the original processing function
+                    try:
+                        result = original_process_single_job(job)
+                    except Exception as e:
+                        error_msg = f"Processing failed: {str(e)}"
+                        progress_tracker.update_progress(
+                            job_id, 0, "failed",
+                            error_msg,
+                            "Error"
+                        )
+                        job['error'] = error_msg
+                        queue_manager.update_job_status(job_id, "failed", error=error_msg)
+                        return
 
-                progress_tracker.update_progress(
-                    job_id, 100, "completed",
-                    f"Job {job_id} completed successfully! Files uploaded to Google Drive.",
-                    "Complete"
-                )
+                    # Topaz enhancement progress placeholders (actual handled in original processing if enabled)
+                    # (Let original process handle real enhancement & upload.)
+
+                    # Mark job as completed
+                    progress_tracker.update_progress(
+                        job_id, 100, "completed",
+                        f"Job {job_id} completed successfully!",
+                        "Complete"
+                    )
+                    queue_manager.update_job_status(job_id, "completed")
+                    return result
+
+                except Exception as e:
+                    error_msg = f"Job failed: {str(e)}"
+                    progress_tracker.update_progress(
+                        job_id, 0, "failed",
+                        error_msg,
+                        "Error"
+                    )
+                    job['error'] = error_msg
+                    queue_manager.update_job_status(job_id, "failed", error=error_msg)
+                    raise
 
                 return result
 
@@ -338,17 +604,45 @@ def start_processing():
                 )
                 raise
 
-        processor_app.process_single_job = enhanced_process_single_job
+        # Attach enhanced processor to processor_app for possible direct calls
+        processor_app.enhanced_process_single_job = enhanced_process_single_job
 
         def run_processing_loop():
-            processor_app.start_processing()
+            logger.info("Starting processing loop")
+            while is_processing:
+                try:
+                    # Get pending jobs
+                    pending_jobs = queue_manager.get_pending_jobs(limit=1)
+                    if pending_jobs:
+                        job = pending_jobs[0]
+                        try:
+                            # Update job status to processing
+                            queue_manager.update_job_status(job['job_id'], "processing")
+                            # Process the job
+                            enhanced_process_single_job(job)
+                        except Exception as e:
+                            logger.error(f"Error processing job {job['job_id']}: {str(e)}")
+                            queue_manager.update_job_status(job['job_id'], "failed", error=str(e))
+                    else:
+                        # No jobs to process, wait a bit
+                        time.sleep(5)
+                except Exception as e:
+                    logger.error(f"Error in processing loop: {str(e)}")
+                    time.sleep(5)
 
+        progress_tracker.add_log("Starting processing engine...")
         processing_thread = threading.Thread(target=run_processing_loop, daemon=True)
         processing_thread.start()
 
-        progress_tracker.add_log("Processing engine started")
+        queue_stats = queue_manager.get_queue_stats()
+        progress_tracker.add_log(
+            f"Processing engine started. {queue_stats.get('pending', 0)} jobs pending."
+        )
 
-        return jsonify({'success': True, 'message': 'Processing started successfully'})
+        start_msg = 'Processing started successfully'
+        if not pending_jobs:
+            start_msg += ' (waiting for jobs...)'
+        return jsonify({'success': True, 'message': start_msg})
     except Exception as e:
         is_processing = False
         logger.error(f"Error starting processing: {e}")
@@ -357,10 +651,17 @@ def start_processing():
 @app.route('/api/stop_processing', methods=['POST'])
 def stop_processing():
     """Stop the processing engine"""
-    global is_processing, processor_app
+    global is_processing, processor_app, processing_thread
 
     try:
+        # Set flag to stop the processing loop
         is_processing = False
+        
+        # Wait for the processing thread to finish (with timeout)
+        if processing_thread and processing_thread.is_alive():
+            processing_thread.join(timeout=5.0)
+        
+        # Stop the processor app if it exists
         if processor_app:
             processor_app.running = False
 
@@ -369,6 +670,7 @@ def stop_processing():
             "Processing engine stopped by user",
             "Stopped"
         )
+        progress_tracker.add_log("Processing engine stopped")
 
         return jsonify({'success': True, 'message': 'Processing stopped successfully'})
     except Exception as e:
@@ -400,6 +702,34 @@ def handle_connect():
 @socketio.on('disconnect')
 def handle_disconnect():
     logger.info(f"Client disconnected: {request.remote_addr}")
+
+# -------- Queue Processing --------
+
+def process_queue():
+    """Process all jobs in the queue"""
+    global is_processing, processor_app
+
+    try:
+        while True:
+            jobs = queue_manager.get_all_jobs()
+            pending_jobs = [job for job in jobs if job['status'] == 'pending']
+            
+            if not pending_jobs:
+                logger.info("No more pending jobs in queue")
+                break
+
+            for job in pending_jobs:
+                try:
+                    processor_app.enhanced_process_single_job(job)
+                except Exception as e:
+                    logger.error(f"Error processing job {job['job_id']}: {str(e)}")
+                    continue
+
+    except Exception as e:
+        logger.error(f"Queue processing error: {str(e)}")
+    finally:
+        is_processing = False
+        logger.info("Queue processing completed")
 
 # -------- Main Entrypoint --------
 

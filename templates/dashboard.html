@@ -199,6 +199,41 @@
             color: white;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background: #2a2a2a;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -308,12 +343,52 @@
         </div>
 
         <!-- Controls -->
-        <div class="controls">
-            <button class="btn btn-primary" onclick="showAddJobModal()">Add Custom Job</button>
-            <button class="btn btn-success" onclick="addTestJob()">Add Test Job</button>
-            <button class="btn btn-primary" onclick="startProcessing()">Start Processing</button>
-            <button class="btn btn-danger" onclick="stopProcessing()">Stop Processing</button>
-            <button class="btn btn-primary refresh-btn" onclick="refreshData()">Refresh</button>
+                <div class="controls">
+            <button id="startProcessing" class="btn btn-success">Start Processing</button>
+            <button id="stopProcessing" class="btn btn-danger" style="display: none;">Stop Processing</button>
+            <button id="addTestJob" class="btn btn-primary">Add Test Job</button>
+            <button id="openManualProcess" class="btn btn-primary">Manual Process</button>
+        </div>
+
+        <!-- Manual Process Modal -->
+        <div id="manualProcessModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Manual Video Processing</h2>
+                <div class="form-group">
+                    <label for="driveLink">Google Drive Link</label>
+                    <input type="text" id="driveLink" placeholder="Paste Google Drive video link here">
+                </div>
+                <div class="form-group">
+                    <label for="tapeType">Tape Type (Optional)</label>
+                    <select id="tapeType">
+                        <option value="">Auto Detect</option>
+                        <option value="VHS">VHS</option>
+                        <option value="MiniDV">MiniDV</option>
+                        <option value="Hi8">Hi8</option>
+                        <option value="Betamax">Betamax</option>
+                        <option value="Digital8">Digital8</option>
+                        <option value="Super8">Super8</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Enhancement Options</label>
+                    <div>
+                        <input type="checkbox" id="topazEnhancement">
+                        <label for="topazEnhancement">Use Topaz Video Enhancement</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="outputResolution">Output Resolution</label>
+                    <select id="outputResolution">
+                        <option value="480p">480p (SD)</option>
+                        <option value="720p">720p (HD)</option>
+                        <option value="1080p" selected>1080p (Full HD)</option>
+                        <option value="2160p">2160p (4K)</option>
+                    </select>
+                </div>
+                <button id="submitManualJob" class="btn btn-success">Start Processing</button>
+            </div>
         </div>
 
         <!-- Logs Section -->
@@ -378,11 +453,9 @@
     </div>
 
     <script>
-        // Initialize Socket.IO connection
-        const socket = io();
-
-        // Global variables
-        let isProcessing = false;
+    // Initialize Socket.IO connection & global state
+    const socket = io();
+    let isProcessing = false;
 
         // Socket event handlers
         socket.on('connect', function() {
@@ -440,6 +513,66 @@
         }
 
         // API functions
+        // Modal Controls
+        const manualProcessModal = document.getElementById('manualProcessModal');
+        const openManualProcessBtn = document.getElementById('openManualProcess');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const submitManualJobBtn = document.getElementById('submitManualJob');
+
+        openManualProcessBtn.onclick = () => {
+            manualProcessModal.style.display = 'block';
+        };
+
+        closeModalBtn.onclick = () => {
+            manualProcessModal.style.display = 'none';
+        };
+
+        window.onclick = (event) => {
+            if (event.target == manualProcessModal) {
+                manualProcessModal.style.display = 'none';
+            }
+        };
+
+        // Manual Job Submission
+        submitManualJobBtn.onclick = async () => {
+            const driveLink = document.getElementById('driveLink').value;
+            if (!driveLink) {
+                alert('Please enter a Google Drive link');
+                return;
+            }
+
+            const jobData = {
+                drive_link: driveLink,
+                tape_type: document.getElementById('tapeType').value || undefined,
+                topaz_enhancement: document.getElementById('topazEnhancement').checked,
+                output_resolution: document.getElementById('outputResolution').value
+            };
+
+            try {
+                const response = await fetch('/api/add_manual_job', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jobData)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    addLog(`Manual job added successfully!`);
+                    manualProcessModal.style.display = 'none';
+                    document.getElementById('driveLink').value = '';
+                    refreshData();
+                } else {
+                    addLog(`Error: ${result.error}`);
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                addLog(`Error submitting manual job: ${error.message}`);
+                alert('Error submitting job: ' + error.message);
+            }
+        };
+
         async function addTestJob() {
             try {
                 const response = await fetch('/api/add_test_job', {
@@ -500,7 +633,9 @@
             }
         }
 
-        async function refreshData() {
+    // (Removed duplicate isProcessing declaration)
+
+    async function refreshData() {
             try {
                 // Get queue data
                 const queueResponse = await fetch('/api/queue');
@@ -510,10 +645,13 @@
                 document.getElementById('pending-count').textContent = queueData.pending_count;
                 document.getElementById('total-jobs').textContent = queueData.total_jobs;
                 
+                // Normalize recent jobs array (backend may supply recent_jobs or recent_completed)
+                let recentJobs = Array.isArray(queueData.recent_jobs) ? queueData.recent_jobs : (queueData.recent_completed || []);
+
                 // Update queue list
                 const queueContainer = document.getElementById('queue-container');
-                if (queueData.recent_jobs.length > 0) {
-                    queueContainer.innerHTML = queueData.recent_jobs.map(job => `
+                if (recentJobs.length > 0) {
+                    queueContainer.innerHTML = recentJobs.map(job => `
                         <div class="job-item ${job.status}">
                             <strong>Job ${job.job_id.substring(0, 8)}...</strong> - ${job.tape_type || 'Unknown'}<br>
                             Status: ${job.status} | Created: ${new Date(job.created_at).toLocaleString()}
@@ -575,6 +713,48 @@
             
             // Refresh data every 10 seconds
             setInterval(refreshData, 10000);
+
+            // Cache elements
+            const startBtn = document.getElementById('startProcessing');
+            const stopBtn = document.getElementById('stopProcessing');
+            const addTestBtn = document.getElementById('addTestJob');
+            const openManualBtn = document.getElementById('openManualProcess');
+            const submitManualBtn = document.getElementById('submitManualJob');
+            const manualProcessModal = document.getElementById('manualProcessModal');
+            const closeModal = manualProcessModal.querySelector('.close-modal');
+
+            function toggleProcessingButtons(running) {
+                if (running) {
+                    startBtn.style.display = 'none';
+                    stopBtn.style.display = 'inline-block';
+                } else {
+                    startBtn.style.display = 'inline-block';
+                    stopBtn.style.display = 'none';
+                }
+            }
+
+            // Bind events
+            if (startBtn) startBtn.addEventListener('click', async () => {
+                addLog('Starting processing...');
+                try { await startProcessing(); toggleProcessingButtons(true); } catch(e) { addLog('Failed to start: '+e.message); }
+            });
+            if (stopBtn) stopBtn.addEventListener('click', async () => {
+                addLog('Stopping processing...');
+                try { await stopProcessing(); toggleProcessingButtons(false); } catch(e) { addLog('Failed to stop: '+e.message); }
+            });
+            if (addTestBtn) addTestBtn.addEventListener('click', addTestJob);
+            if (openManualBtn) openManualBtn.addEventListener('click', () => {
+                manualProcessModal.style.display = 'block';
+            });
+            if (submitManualBtn) submitManualBtn.addEventListener('click', submitManualJob);
+            if (closeModal) closeModal.addEventListener('click', () => manualProcessModal.style.display = 'none');
+            window.addEventListener('click', (e) => { if (e.target === manualProcessModal) manualProcessModal.style.display = 'none'; });
+
+            // Reuse existing socket connection for progress updates
+            socket.on('progress_update', data => {
+                isProcessing = !!(data && data.is_processing);
+                toggleProcessingButtons(isProcessing);
+            });
         });
     </script>
 </body>

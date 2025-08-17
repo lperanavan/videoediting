@@ -28,12 +28,29 @@ class GDriveHandler:
         self.config = config or {}
         self.logger = logging.getLogger(__name__)
         self.service = None
+        
+        if not GOOGLE_AVAILABLE:
+            raise ImportError("Google Drive dependencies not installed. Please install google-api-python-client and google-auth-httplib2")
+        
+        self._initialize_service()
         self.enabled = self.config.get("enabled", False) and GOOGLE_AVAILABLE
         
         if self.enabled:
             self._initialize_service()
         else:
             self.logger.warning("Google Drive integration disabled or dependencies missing")
+        # Cache for folders we've already validated as writable
+        self._validated_folders = set()
+        self.service_account_email = None
+        try:
+            # Extract service account email (for user guidance) from credentials file if available
+            credentials_path = self.config.get("credentials_file", "config/gdrive_credentials.json")
+            if os.path.exists(credentials_path):
+                with open(credentials_path, 'r', encoding='utf-8') as cf:
+                    data = json.load(cf)
+                    self.service_account_email = data.get('client_email')
+        except Exception:
+            pass
     
     def _initialize_service(self):
         """Initialize Google Drive service"""
@@ -100,9 +117,10 @@ class GDriveHandler:
         """Download a single file from Google Drive"""
         try:
             # Get file metadata
-            file_metadata = self.service.files().get(fileId=file_id, fields='name,size,mimeType').execute()
+            file_metadata = self.service.files().get(fileId=file_id, fields='name,size,mimeType,parents').execute()
             filename = file_metadata['name']
             file_size = int(file_metadata.get('size', 0))
+            parents = file_metadata.get('parents', [])
             
             # Sanitize filename
             safe_filename = self._sanitize_filename(filename)
@@ -144,6 +162,17 @@ class GDriveHandler:
             self.logger.error(f"Unexpected error downloading file {file_id}: {e}")
             return None
     
+    def get_file_parent(self, file_id: str) -> Optional[str]:
+        """Return the first parent folder ID for a file (if any)."""
+        if not self.enabled:
+            return None
+        try:
+            meta = self.service.files().get(fileId=file_id, fields='parents').execute()
+            parents = meta.get('parents', [])
+            return parents[0] if parents else None
+        except Exception as e:
+            self.logger.error(f"Failed to get parent for file {file_id}: {e}")
+            return None
     def upload_files(self, file_paths: List[str], folder_id: str = None, 
                     job_id: str = None) -> List[str]:
         """Upload files to Google Drive"""
@@ -151,10 +180,73 @@ class GDriveHandler:
             return self._mock_upload_files(file_paths, folder_id, job_id)
         
         uploaded_urls = []
-        
-        # Resolve folder ID
+        # Resolve folder ID preference order:
+        # 1. Explicit parameter
+        # 2. config.default_output_folder_id
+        # 3. config.output_folder_id (legacy)
+        # 4. None (will upload to root – not recommended for service accounts)
+        if not folder_id:
+            folder_id = (
+                self.config.get('default_output_folder_id')
+                or self.config.get('output_folder_id')
+            )
+
+        # Allow passing a full URL instead of raw ID
+        if folder_id and folder_id.startswith('http'):
+            extracted = self._extract_file_id_from_url(folder_id)
+            if extracted:
+                folder_id = extracted
+
+        # If still not a valid ID treat as folder name to create / fetch
         if folder_id and not self._is_valid_file_id(folder_id):
-            folder_id = self._get_or_create_folder(folder_id)
+            resolved_name = folder_id
+            folder_id = self._get_or_create_folder(resolved_name)
+            if not folder_id:
+                self.logger.error(f"Failed to resolve or create folder: {resolved_name}")
+        
+        self.logger.info(
+            f"Preparing to upload {len(file_paths)} file(s) to folder: {folder_id or 'ROOT (not recommended)'}"
+        )
+
+        # Log folder metadata (diagnostics) to help user understand why quota errors occur
+        if folder_id:
+            try:
+                meta = self.service.files().get(
+                    fileId=folder_id,
+                    fields='id,name,mimeType,owners(emailAddress,displayName),driveId,parents',
+                    supportsAllDrives=True
+                ).execute()
+                drive_id = meta.get('driveId')
+                owner_info = meta.get('owners', [])
+                owner_str = ', '.join([o.get('emailAddress','?') for o in owner_info]) or 'unknown'
+                if drive_id:
+                    self.logger.info(
+                        f"Target folder metadata: name={meta.get('name')} id={folder_id} driveId={drive_id} owners={owner_str} (Shared Drive detected)"
+                    )
+                else:
+                    self.logger.info(
+                        f"Target folder metadata: name={meta.get('name')} id={folder_id} owners={owner_str} driveId=None (User 'My Drive' folder)"
+                    )
+                    if owner_info and any(self.service_account_email and self.service_account_email in (o.get('emailAddress') or '') for o in owner_info):
+                        self.logger.warning(
+                            "Folder appears to be OWNED by the service account (no personal quota). Move it into a human user's My Drive or a Shared Drive and share back to the service account."
+                        )
+                    else:
+                        self.logger.info(
+                            "If you continue to see storageQuotaExceeded, verify the folder is not inside the service account's own My Drive by moving it to a Shared Drive."
+                        )
+            except Exception as e:
+                self.logger.debug(f"Could not fetch folder metadata for diagnostics: {e}")
+
+        # Verify folder write access once per folder_id (if provided)
+        if folder_id and folder_id not in self._validated_folders:
+            if not self._verify_folder_writable(folder_id):
+                self.logger.error(
+                    "Aborting upload: Service account cannot write to folder %s. Share the folder with %s as Editor/Content Manager (or place it in a Shared Drive and share that).",
+                    folder_id, self.service_account_email or 'the service account'
+                )
+                return []
+            self._validated_folders.add(folder_id)
         
         for file_path in file_paths:
             try:
@@ -202,7 +294,8 @@ class GDriveHandler:
             request = self.service.files().create(
                 body=file_metadata,
                 media_body=media,
-                fields='id,name,webViewLink,webContentLink'
+                fields='id,name,webViewLink,webContentLink',
+                supportsAllDrives=True
             )
             
             file_result = None
@@ -224,7 +317,19 @@ class GDriveHandler:
             return file_url
             
         except HttpError as e:
-            self.logger.error(f"HTTP error uploading file {file_path}: {e}")
+            # Provide clearer guidance for common 403 quota issue with service accounts
+            try:
+                reason = getattr(e, 'reason', '') or ''
+                if 'storageQuotaExceeded' in str(e):
+                    self.logger.error(
+                        "HTTP error uploading file (quota). Service accounts have no personal My Drive quota. "
+                        "Share a user-owned (or shared drive) folder with the service account and supply its folder ID in config.gdrive.default_output_folder_id or output_folder_id. "
+                        "Alternatively use a Shared Drive and enable 'supportsAllDrives'. Original error: %s", e
+                    )
+                else:
+                    self.logger.error(f"HTTP error uploading file {file_path}: {e}")
+            except Exception:
+                self.logger.error(f"HTTP error uploading file {file_path}: {e}")
             return None
         except Exception as e:
             self.logger.error(f"Unexpected error uploading file {file_path}: {e}")
@@ -259,7 +364,9 @@ class GDriveHandler:
             results = self.service.files().list(
                 q=query,
                 fields='files(id, name)',
-                pageSize=10
+                pageSize=10,
+                includeItemsFromAllDrives=True,
+                supportsAllDrives=True
             ).execute()
             
             files = results.get('files', [])
@@ -279,7 +386,9 @@ class GDriveHandler:
             results = self.service.files().list(
                 q=query,
                 fields='files(id, name)',
-                pageSize=10
+                pageSize=10,
+                includeItemsFromAllDrives=True,
+                supportsAllDrives=True
             ).execute()
             
             files = results.get('files', [])
@@ -301,6 +410,55 @@ class GDriveHandler:
         except Exception as e:
             self.logger.error(f"Error creating folder {folder_name}: {e}")
             return None
+
+    def _verify_folder_writable(self, folder_id: str) -> bool:
+        """Attempt to verify that the service account can write to the specified folder.
+        Creates and deletes a tiny temp file. Returns True if successful."""
+        try:
+            # Get folder metadata to confirm it exists and is a folder
+            meta = self.service.files().get(
+                fileId=folder_id,
+                fields='id,name,mimeType,driveId',
+                supportsAllDrives=True
+            ).execute()
+            if meta.get('mimeType') != 'application/vnd.google-apps.folder':
+                self.logger.error(f"Target ID {folder_id} is not a folder (mimeType={meta.get('mimeType')})")
+                return False
+
+            # Try creating a small temp file
+            test_name = f".write_test_{int(time.time())}.tmp"
+            file_metadata = {
+                'name': test_name,
+                'parents': [folder_id]
+            }
+            media = MediaFileUpload(__file__, mimetype='text/plain', resumable=False)
+            # We upload the current source file (tiny) just as a writable test, then delete
+            test_file = self.service.files().create(
+                body=file_metadata,
+                media_body=media,
+                fields='id',
+                supportsAllDrives=True
+            ).execute()
+            test_id = test_file.get('id')
+            # Delete test file
+            self.service.files().delete(fileId=test_id, supportsAllDrives=True).execute()
+            self.logger.info(
+                f"Verified write access to folder {folder_id} as service account {self.service_account_email or ''}".strip()
+            )
+            return True
+        except HttpError as e:
+            if 'storageQuotaExceeded' in str(e):
+                self.logger.error(
+                    "Write test failed due to storageQuotaExceeded. This indicates the folder is in the service account's 'My Drive'. Move it to a user-owned drive shared with the service account, or a Shared Drive."
+                )
+            else:
+                self.logger.error(
+                    f"Cannot write to folder {folder_id}. Share it with {self.service_account_email or 'service account'} and grant Editor permission. Error: {e}"
+                )
+            return False
+        except Exception as e:
+            self.logger.error(f"Unexpected error verifying folder {folder_id}: {e}")
+            return False
     
     def _sanitize_filename(self, filename: str) -> str:
         """Sanitize filename for local filesystem"""

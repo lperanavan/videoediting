@@ -157,7 +157,8 @@ class VideoProcessorApp:
                 local_files, 
                 tape_type,
                 self.config["directories"]["output"],
-                job_id=job_id
+                job_id=job_id,
+                processing_options=job.get('processing_options')
             )
             
             # Step 4: Enhance with Topaz (if enabled and requested)
@@ -178,10 +179,16 @@ class VideoProcessorApp:
             self.logger.info(f"[{job_id}] Uploading processed videos to Google Drive")
             upload_urls = self.gdrive_handler.upload_files(
                 final_output,
-                job.get('output_folder_id'),
+                job.get('output_folder_id') or 
+                self.config.get('gdrive', {}).get('default_output_folder_id') or 
+                self.config.get('gdrive', {}).get('output_folder_id'),  # legacy fallback
                 job_id=job_id
             )
             
+            if not upload_urls:
+                # Treat missing uploads as failure (so user can see problem) instead of silent success
+                raise Exception("No files were uploaded. Check Google Drive folder sharing / quota.")
+
             # Step 6: Update job status to completed
             self.queue_manager.update_job_status(
                 job_id, 

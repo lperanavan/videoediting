@@ -8,7 +8,7 @@ import os
 import time
 import uuid
 import threading
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Dict, List, Optional, Any
 import logging
 from pathlib import Path
@@ -52,7 +52,38 @@ class QueueManager:
                     # Validate structure
                     if not isinstance(data, dict) or "jobs" not in data:
                         raise ValueError("Invalid queue file structure")
-                        
+                    
+                    # Validate and fix jobs
+                    for job in data["jobs"]:
+                        # Ensure each job has required fields with default values
+                        if "job_id" not in job:
+                            job["job_id"] = str(uuid.uuid4())
+                        if "status" not in job:
+                            job["status"] = "pending"
+                        if "created_at" not in job:
+                            job["created_at"] = datetime.now(timezone.utc).isoformat()
+                        if "updated_at" not in job:
+                            job["updated_at"] = job.get("created_at", datetime.now(timezone.utc).isoformat())
+                        if "progress" not in job:
+                            job["progress"] = 0
+                        if "customer_id" not in job:
+                            job["customer_id"] = "unknown"
+                        if "source_files" not in job:
+                            job["source_files"] = []
+                        if "tape_type" not in job:
+                            job["tape_type"] = "unknown"
+                        if "processing_options" not in job:
+                            job["processing_options"] = {}
+                        if "metadata" not in job:
+                            job["metadata"] = {}
+                        if "is_manual" not in job:
+                            job["is_manual"] = False
+                        if "error" not in job:
+                            job["error"] = None
+                    
+                    # Save the fixed data back to the file
+                    self._save_queue(data)
+                    
                     return data
                     
             except (json.JSONDecodeError, ValueError, FileNotFoundError) as e:
@@ -109,24 +140,27 @@ class QueueManager:
         """Add a new job to the queue"""
         job_id = str(uuid.uuid4())
         
-        # Validate required fields
-        required_fields = ['source_files']
-        for field in required_fields:
-            if field not in job_data:
-                raise ValueError(f"Missing required field: {field}")
+        # For manual jobs with drive_link, we don't require source_files
+        if not job_data.get('is_manual') and 'source_files' not in job_data:
+            raise ValueError("Missing required field: source_files")
         
+        # Create base job structure with all required fields
         job = {
             "job_id": job_id,
             "status": "pending",
+            "progress": 0,
             "created_at": datetime.now(timezone.utc).isoformat(),
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "customer_id": job_data.get('customer_id', 'unknown'),
             "tape_type": job_data.get('tape_type', 'auto'),
-            "source_files": job_data['source_files'],
+            "source_files": job_data.get('source_files', []),
+            "drive_link": job_data.get('drive_link'),
+            "is_manual": job_data.get('is_manual', False),
             "processing_options": job_data.get('processing_options', {}),
             "output_folder_id": job_data.get('output_folder_id'),
             "priority": job_data.get('priority', 5),  # 1-10, lower is higher priority
-            "metadata": job_data.get('metadata', {})
+            "metadata": job_data.get('metadata', {}),
+            "error": None
         }
         
         queue_data = self._load_queue()
@@ -149,15 +183,42 @@ class QueueManager:
         pending_jobs.sort(key=lambda x: (x.get("priority", 5), x["created_at"]))
         
         return pending_jobs[:limit]
+
+    def get_all_jobs(self) -> List[Dict]:
+        """Return a shallow copy list of all jobs in the queue.
+        Added to support web UI start processing route which expects this helper.
+        """
+        queue_data = self._load_queue()
+        # Return copies to avoid accidental external mutation
+        return [job.copy() for job in queue_data.get("jobs", [])]
     
     def get_jobs_by_status(self, status: str, limit: int = None) -> List[Dict]:
         """Get jobs by status"""
         queue_data = self._load_queue()
         
-        jobs = [
-            job for job in queue_data["jobs"] 
-            if job["status"] == status
-        ]
+        # Filter jobs by status and ensure all required fields are present
+        jobs = []
+        for job in queue_data["jobs"]:
+            if job.get("status") == status:
+                # Ensure all required fields are present
+                validated_job = {
+                    "job_id": job.get("job_id", str(uuid.uuid4())),
+                    "status": job.get("status", "unknown"),
+                    "progress": job.get("progress", 0),
+                    "created_at": job.get("created_at", datetime.now(timezone.utc).isoformat()),
+                    "updated_at": job.get("updated_at", job.get("created_at")),
+                    "customer_id": job.get("customer_id", "unknown"),
+                    "tape_type": job.get("tape_type", "unknown"),
+                    "source_files": job.get("source_files", []),
+                    "drive_link": job.get("drive_link"),
+                    "is_manual": job.get("is_manual", False),
+                    "processing_options": job.get("processing_options", {}),
+                    "output_folder_id": job.get("output_folder_id"),
+                    "priority": job.get("priority", 5),
+                    "metadata": job.get("metadata", {}),
+                    "error": job.get("error")
+                }
+                jobs.append(validated_job)
         
         # Sort by update time (most recent first)
         jobs.sort(key=lambda x: x.get("updated_at", x["created_at"]), reverse=True)
@@ -231,14 +292,14 @@ class QueueManager:
     def get_queue_stats(self) -> Dict:
         """Get queue statistics"""
         queue_data = self._load_queue()
-        jobs = queue_data["jobs"]
+        jobs = queue_data.get("jobs", [])
         
         stats = {
             "total_jobs": len(jobs),
-            "pending": len([j for j in jobs if j["status"] == "pending"]),
-            "processing": len([j for j in jobs if j["status"] == "processing"]),
-            "completed": len([j for j in jobs if j["status"] == "completed"]),
-            "failed": len([j for j in jobs if j["status"] == "failed"])
+            "pending": len([j for j in jobs if j.get("status") == "pending"]),
+            "processing": len([j for j in jobs if j.get("status") == "processing"]),
+            "completed": len([j for j in jobs if j.get("status") == "completed"]),
+            "failed": len([j for j in jobs if j.get("status") == "failed"])
         }
         
         # Calculate processing times for completed jobs

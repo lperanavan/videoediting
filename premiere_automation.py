@@ -83,8 +83,17 @@ class PremiereAutomation:
             self.app = None
     
     def process_videos(self, input_files: List[str], tape_type: str, 
-                      output_dir: str, job_id: str = None) -> List[str]:
-        """Process videos using Premiere Pro automation"""
+                      output_dir: str, job_id: str = None,
+                      processing_options: Optional[Dict] = None) -> List[str]:
+        """Process videos using Premiere Pro automation
+
+        Parameters:
+            input_files: list of source video file paths
+            tape_type: detected or provided tape type (e.g., VHS)
+            output_dir: destination directory for processed videos
+            job_id: optional job identifier used to prefix output filenames
+            processing_options: dict that may include 'premiere_preset' to override the default template
+        """
         if not self.enabled:
             return self._mock_process_videos(input_files, tape_type, output_dir, job_id)
         
@@ -97,10 +106,16 @@ class PremiereAutomation:
                     self.logger.error(f"Input file not found: {input_file}")
                     continue
                 
-                self.logger.info(f"Processing {input_file} with {tape_type} preset")
+                custom_preset = None
+                if processing_options:
+                    custom_preset = processing_options.get('premiere_preset') or processing_options.get('preset')
+                if custom_preset:
+                    self.logger.info(f"Processing {input_file} with custom preset override '{custom_preset}' (tape type: {tape_type})")
+                else:
+                    self.logger.info(f"Processing {input_file} with {tape_type} preset")
                 
                 output_file = self._process_single_video(
-                    input_file, tape_type, output_dir, job_id, i
+                    input_file, tape_type, output_dir, job_id, i, custom_preset
                 )
                 
                 if output_file:
@@ -114,8 +129,13 @@ class PremiereAutomation:
     
     def _process_single_video(self, input_file: str, tape_type: str, 
                              output_dir: str, job_id: str = None, 
-                             file_index: int = 0) -> Optional[str]:
-        """Process a single video file"""
+                             file_index: int = 0,
+                             custom_preset: Optional[str] = None) -> Optional[str]:
+        """Process a single video file
+
+        custom_preset: Optional project template name (file name) to override tape_type mapping.
+        Accepts either a .prproj, .json, or .prfpset (effect/color) file – logic will adapt.
+        """
         try:
             # Generate output filename
             input_name = Path(input_file).stem
@@ -127,7 +147,18 @@ class PremiereAutomation:
             output_file = os.path.join(output_dir, output_name)
             
             # Get or create project template
-            project_template = self._get_project_template(tape_type)
+            project_template = None
+            if custom_preset:
+                # Resolve custom preset path inside presets dir if just a filename
+                candidate = custom_preset
+                if not os.path.isabs(candidate):
+                    candidate = os.path.join(self.presets_dir, candidate)
+                if os.path.exists(candidate):
+                    project_template = candidate
+                else:
+                    self.logger.warning(f"Custom preset '{custom_preset}' not found, falling back to tape type mapping")
+            if not project_template:
+                project_template = self._get_project_template(tape_type)
             if not project_template:
                 self.logger.error(f"No project template found for {tape_type}")
                 return self._fallback_processing(input_file, output_file)
@@ -179,6 +210,30 @@ class PremiereAutomation:
         # Create basic template if it doesn't exist
         self.logger.warning(f"Template not found: {template_path}, creating basic template")
         return self._create_basic_template(tape_type, template_path)
+
+    # ---- Preset management helpers ----
+    def refresh_presets(self):
+        """Refresh available preset files (project/effect/export) in presets directory."""
+        try:
+            files = os.listdir(self.presets_dir)
+            self.available_presets = [f for f in files if f.lower().endswith(('.prproj', '.json', '.prfpset', '.epr'))]
+        except Exception as e:
+            self.available_presets = []
+            self.logger.error(f"Failed to list presets: {e}")
+
+    def get_available_presets(self) -> List[str]:
+        """Return list of cached available preset filenames."""
+        if not hasattr(self, 'available_presets'):
+            self.refresh_presets()
+        return self.available_presets
+
+    def update_preset_mapping(self, mapping: Dict[str, str]):
+        """Update internal tape_type -> preset mapping dynamically."""
+        if not isinstance(mapping, dict):
+            self.logger.warning("Provided mapping is not a dict; ignoring")
+            return
+        self.preset_mapping.update(mapping)
+        self.logger.info(f"Updated preset mapping entries: {list(mapping.keys())}")
     
     def _create_basic_template(self, tape_type: str, template_path: str) -> str:
         """Create a basic project template"""
