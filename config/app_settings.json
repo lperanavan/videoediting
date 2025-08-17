@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
   "directories": {
-    "input": "D:/t2d/VideoProcessorApp/input_videos",
-    "output": "D:/t2d/VideoProcessorApp/output_videos",
-    "temp": "D:/t2d/VideoProcessorApp/temp",
-    "presets": "D:/t2d/VideoProcessorApp/presets",
-    "logs": "D:/t2d/VideoProcessorApp/logs"
+    "input": "input_videos",
+    "output": "output_videos",
+    "temp": "temp",
+    "presets": "presets",
+    "logs": "logs"
   },
   "processing": {
     "max_concurrent_jobs": 1,
@@ -22,7 +22,7 @@
   },
   "gdrive": {
     "enabled": true,
-    "credentials_file": "D:/t2d/VideoProcessorApp/config/gdrive_credentials.json",
+  "credentials_file": "config/gdrive_credentials.json",
     "upload_timeout": 3600,
     "download_timeout": 3600,
     "chunk_size": 1048576,
